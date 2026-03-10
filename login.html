@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SumberManis</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="shortcut icon" href="/foto/logomitra.png" type="foto/logomitra.png">
+    <style>
+
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="index.html" class="logo-link"><i class="bi bi-cart4"></i> SumberManis</a>
+            </div>
+            <div class="header-center">
+                <h1>Login</h1>
+                <p>Masukkan akun Anda untuk melanjutkan</p>
+            </div>
+<!--             <div class="header-right">
+                <a href="register.html" class="auth-icon-btn btn-register">📝 Daftar</a> -->
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN LOGIN -->
+    <main>
+        <div class="auth-container">
+            <div class="auth-box">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div style="font-size: 3rem;"><i class="bi bi-person-fill-lock"></i></div>
+                    <h2>Login ke Admin</h2>
+                    <p style="color: #666;">Masukkan email dan password</p>
+                </div>
+
+                <!-- Alert Error/Success -->
+                <div id="alert" class="alert"></div>
+
+                <form id="login-form" onsubmit="handleLogin(event)">
+                    <div class="form-groupp">
+                        <label>Email/Username</label>
+                        <input type="email" id="login-email" placeholder="Ketik user Anda" required>
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+
+                    <div class="form-groupp">
+                        <label>Password</label>
+                        <input type="password" id="login-password" placeholder="Password" required>
+                        <!-- <i class="bi bi-lock-fill"></i> -->
+                    </div>
+
+                    <button type="submit" id="btnlogin" class="btn btn-primary"><i class="bi bi-lock-fill"></i> Login</button>
+                </form>
+
+                <div class="auth-link">
+                    <!-- <p>Belum punya akun? <a href="register.html">Daftar di sini</a></p> -->
+                    <p style="margin-top: 10px;"><a href="user.html">← Kembali ke Beranda</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2023 MiniStore - Sistem Toko Online
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+</html>

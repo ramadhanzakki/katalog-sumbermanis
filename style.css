@@ -1,0 +1,1424 @@
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+
+   .hero-banner {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.hero-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+        /* --- CSS SAMA DENGAN KAMU --- */
+        body { font-family: sans-serif; background: #f4f4f4; }
+        .header { background: white; padding: 15px; text-align: center; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 20px; max-width: 1000px; margin: 0; }
+
+        /* --- CSS MODAL (WAJIB ADA) --- */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; }
+        .modal-wrapper { background: white; margin: 10% auto; width: 600px; padding: 20px; border-radius: 10px; display: flex; gap: 20px; position: relative; }
+        .modal-close { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; }
+        .modal-left img { width: 200px; height: 200px; object-fit: cover; }
+        .modal-right { flex: 1; }
+        .price-box { background: #ff0000; padding: 10px; margin: 10px 0; border-radius: 5px; }
+
+:root {
+    --primary: #5aa8b7;
+    --primary-dark: #2980b9;
+    --secondary: #2c3e50;
+    --success: #27ae60;
+    --danger: #e74c3c;
+    --warning: #f39c12;
+    --light: #ecf0f1;
+    --dark: #2c3e50;
+    --white: #ffffff;
+    --gray: #95a5a6;
+    --gray-light: #bdc3c7;
+    --border: #e0e0e0;
+    --shadow: 0 2px 10px rgba(0,0,0,0.1);
+    --shadow-hover: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+body {
+    background-color: #FFF6E5;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* ============================================
+   HEADER STYLES
+   ============================================ */
+.header {
+    background: linear-gradient(135deg,#5aa8b7 ,#5aa8b7 /* #a4312b */ );
+    color: #FFF6E5;
+    padding: 1rem 2rem;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* .header-left  {
+    color: #FFF6E5;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+} 
+/* ============================================
+   LOGO IMAGE STYLES
+   ============================================ */
+.logo-img {
+    height: 40px;
+    width: auto;
+    max-width: 150px;
+    object-fit: contain;
+    
+}
+
+/* Untuk navbar */
+.navbar-brand img {
+    height: 35px;
+    width: auto;
+    border-radius: 8px;
+}
+
+.header-center {
+    text-align: center;
+}
+
+.header-center h1 {
+    font-size: 1.5rem;
+    margin-bottom: 3px;
+}
+
+.header-center p {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+.header-right {
+    display: flex;
+    gap: 10px;
+}
+
+.auth-icon-btn {
+    background-color: rgba(255,255,255,0.15);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.auth-icon-btn:hover {
+    background-color: white;
+    color: var(--primary);
+}
+
+.auth-icon-btn.btn-register {
+    background-color: var(--success);
+    border-color: var(--success);
+}
+
+.auth-icon-btn.btn-register:hover {
+    background-color: #219a52;
+    color: white;
+}
+
+/* ============================================
+   NAVBAR STYLES
+   ============================================ */
+.navbar {
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 65px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.4rem;
+    /* color: var(--dark); */
+    color: #2B2118;
+}
+
+.navbar-brand span {
+/*     color: var(--primary); */
+    color: #C23B33;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.nav-link {
+    text-decoration: none;
+    /* color: var(--dark); */
+    color: #2B2118;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--primary);
+    background-color: #e8f4fc;
+}
+ .nav-link.active {
+    /* color: var(--primary); */
+    color: #2B2118;
+    background-color: #e8f4fc;
+}
+
+.nav-cart {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.nav-cart:hover {
+    background-color: #e8f4fc;
+    color: var(--primary);
+}
+
+.cart-badge {
+    background-color: var(--danger);
+    color: white;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+/* User Dropdown */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    position: relative;
+}
+
+.user-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow-hover);
+    min-width: 150px;
+    display: none;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.user-dropdown.show {
+    display: block;
+}
+
+.user-dropdown a {
+    display: block;
+    padding: 12px 15px;
+    color: var(--dark);
+    transition: background 0.3s;
+}
+
+.user-dropdown a:hover {
+    background-color: #f0f0f0;
+    color: var(--primary);
+}
+
+
+
+/* ============================================
+   HERO BANNER
+   ============================================ */
+.hero-banner {
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+    border-radius: 15px;
+    margin-bottom: 3rem;
+    
+}
+
+.hero-banner h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-banner p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-success {
+    background-color: var(--success);
+    color: white;
+}
+
+.btn-danger {
+    background-color: var(--danger);
+    color: white;
+}
+
+#blj:hover{
+    background-color: #78c4d3;
+}
+.btn-outline {
+    background-color: transparent;
+    border: 1rcap solid #5aa8b7;
+    color: #5aa8b7
+}
+
+.btn-outline:hover {
+    background-color: #78c4d3;
+    color: white;
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+#btnlogin{
+    width: 100%;
+    padding: 10px;
+}
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+/* main {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+ */
+/* ============================================
+   CATALOG HEADER & SEARCH
+   ============================================ */
+.catalog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.search-box input {
+    padding: 12px 20px;
+    border: 2px solid var(--border);
+    border-radius: 25px;
+    width: 300px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+
+/* ============================================
+   AUTH PAGES (LOGIN/REGISTER)
+   ============================================ */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    padding: 2rem;
+}
+
+.auth-box {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow-hover);
+    width: 100%;
+    max-width: 450px;
+}
+
+.auth-box h2 {
+    text-align: center;
+    margin-bottom: 5px;
+    color: var(--dark);
+}
+
+.auth-box > p {
+    text-align: center;
+    color: var(--gray);
+    margin-bottom: 2rem;
+}
+
+/* Alert Messages */
+.alert {
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: none;
+    font-size: 0.9rem;
+}
+
+.alert.show {
+    display: block;
+}
+
+.alert-error {
+    background-color: #fee2e2;
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+.alert-success {
+    background-color: #dcfce7;
+    color: var(--success);
+    border: 1px solid var(--success);
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: var(--dark);
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.auth-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+}
+
+.auth-link a {
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+/* buat login */
+
+#login-form .form-groupp{
+    position: relative;
+}
+.form-groupp i {
+    position: absolute;
+    right: 20px;
+    bottom: 1.4cap;
+    
+}
+.form-groupp {
+    margin-bottom: 1.2rem;
+}
+
+.form-groupp label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: var(--dark);
+}
+.form-groupp input,
+.form-groupp textarea,
+.form-groupp select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-groupp input:focus,
+.form-groupp textarea:focus,
+.form-groupp select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.form-groupp textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* ============================================
+   CART PAGE
+   ============================================ */
+.cart-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+.cart-items {
+    background: white;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.cart-item {
+    display: flex;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+}
+
+.cart-item-details {
+    flex: 1;
+}
+
+.cart-item-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--dark);
+    margin-bottom: 5px;
+}
+
+.cart-item-price {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.cart-item-qty {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.qty-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--border);
+    background: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qty-btn:hover {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.cart-item-qty input {
+    width: 50px;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+}
+
+.cart-item-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cart-summary {
+    position: sticky;
+    top: 100px;
+}
+
+.summary-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+}
+
+.summary-card h3 {
+    margin-bottom: 1.5rem;
+    color: var(--dark);
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+.summary-row.total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--dark);
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px dashed var(--border);
+}
+
+/* Empty Cart */
+#empty-cart {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+
+#empty-cart .empty-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+}
+
+#empty-cart h3 {
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+#empty-cart p {
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+/* ============================================
+   CHECKOUT PAGE
+   ============================================ */
+.checkout-layout {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2rem;
+}
+
+.form-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    padding: 2rem;
+}
+
+.form-card h3 {
+    margin-bottom: 1.5rem;
+    color: var(--dark);
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.checkout-summary {
+    position: sticky;
+    top: 100px;
+}
+
+.order-items {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 1.5rem;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+/* ============================================
+   ADMIN PANEL
+   ============================================ */
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 260px;
+    background-color: #5aa8b7;
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    text-align: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar-brand span {
+    color: #5aa8b7;
+}
+
+.sidebar-menu {
+    list-style: none;
+    flex: 1;
+}
+
+.sidebar-menu li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-menu a {
+    color: #bbb;
+    text-decoration: none;
+    display: flex;
+    align-items: center }
+
+
+
+/* --- PRODUCT GRID --- */
+ .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0,0,0,0.15);
+}
+
+.card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background-color: #ddd;
+}
+.card-image img {
+transition: 0.3s;
+}
+.card:hover img{
+transform:scale(1.05);
+}
+
+.card-content {
+padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Jarak antar elemen */
+}
+
+.card-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 4px 0;
+    line-height: 1.3;
+}
+
+.card-desc {
+    font-size: 0.85rem;
+    color: #777;
+    line-height: 1.4;
+    min-height: 38px; /* Supaya tinggi konsisten */
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+.btn-buy {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-buy:hover {
+    background-color: #2980b9;
+}
+ 
+
+/* --- HAMBURGER BUTTON --- */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    padding: 5px;
+    background: none;
+    border: none;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: rgb(123, 92, 39);
+    border-radius: 3px;
+    transition: all 0.3s;
+}
+
+/* --- OVERLAY --- */
+.nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    z-index: 999;
+}
+.nav-overlay.active { opacity: 1; visibility: visible; }
+
+/* --- MAIN CONTENT --- */
+main {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.hero-banner {
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+}
+
+.catalog-header { margin-bottom: 2rem; }
+
+.btn {
+    padding: 10px 20px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* --- PRODUCT GRID --- */
+
+.card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+
+    display: flex; 
+    flex-direction: column; 
+    height: 100%;
+}
+
+/* .card-content { padding: 1.5rem; } */
+.card-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 0.5rem; }
+.card-desc { font-size: 0.9rem; color: #666; margin-bottom: 1rem; }
+/* .card-footer { display: flex; justify-content: space-between; align-items: center; } */
+.btn-buy {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* --- FOOTER --- */
+footer {
+    background-color: var(--secondary);
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: auto;
+}
+
+/* ============================================
+   RESPONSIVE (HP) - HAMBURGER MENU KE KIRI
+   ============================================ */
+/* Default untuk Layar Besar (PC/Laptop) - 4 Kolom */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+/* Untuk Layar Tablet - 3 Kolom */
+@media (max-width: 1024px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Untuk Layar HP - 2 Kolom */
+@media (max-width: 600px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px; /* Jarak lebih kecil di HP */
+    }
+}
+@media (max-width: 768px) {
+    .header-content { flex-direction: column; gap: 10px; }
+    .header-center { order: -1; }
+    .header-right { display: none; }
+    
+    .navbar { padding: 0 1rem; }
+    .navbar-brand-mobile {
+        display: block;
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+    }
+    .navbar-brand-mobile span { color: var(--primary); }
+    
+    /* Tampilkan hamburger */
+    .hamburger { display: flex; }
+    
+    /* Menu tersembunyi di kiri (-280px) */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        width: 280px;
+        height: 100vh;
+        background-color: var(--secondary);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 80px 0 20px 0;
+        gap: 0;
+        transition: left 0.3s ease;
+        z-index: 1000;
+    }
+    
+    /* Menu muncul dari kiri */
+    .nav-menu.active { left: 0; 
+    opacity: 0.9;
+    }
+    
+    .nav-menu li { width: 100%; }
+    .nav-menu a {
+        display: block;
+        width: 100%;
+        padding: 15px 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .product-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    /* .card-image { height: 100px; } */
+    /* .card-content { padding: 0.5rem; } */
+}
+        /* --- RESPONSIVE --- */
+        @media (max-width: 600px) {
+            .product-grid {
+                grid-template-columns: 1fr; /* 1 kolom di HP */
+            }
+
+        }
+    #qris-container {
+    animation: fadeIn 0.5s ease; /* Biar munculnya gak kaku */
+}
+
+.btn-confirm {
+    background-color: #5AB9C1; /* Warna Retro Cyan dari logo kita */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-confirm:hover {
+    background-color: #F2A01E; /* Berubah jadi Oranye pas disentuh */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Card untuk User */
+.card-content { padding: 1.5rem; }
+.card-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem; }
+.card-desc { font-size: 0.9rem; color: #666; margin-bottom: 1rem; }
+.price { font-size: 1.1rem; font-weight: bold; color: #27ae60; }
+.btn-buy { background-color: #3498db; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; }
+
+/* Table untuk Admin */
+.img-thumb { width: 60px; height: 40px; object-fit: cover; border-radius: 4px; }
+.btn-edit { background-color: #f39c12; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; margin-right: 5px; }
+.btn-delete { background-color: #e74c3c; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; }
+
+/* Container Utama Dropdown */
+.nav-dropdown {
+    position: relative;
+}
+
+/* Menu yang Sembunyi */
+.dropdown-menu {
+    display: none; /* Sembunyi default */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff;
+    min-width: 180px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    z-index: 1000;
+    padding: 10px 0;
+    list-style: none;
+    border: 1px solid #eee;
+}
+
+/* Item di dalam Dropdown */
+.dropdown-menu li a {
+    color: #333;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #f8f9fa;
+    color: #5AB9C1; /* Warna Retro Cyan dari logo kita */
+}
+
+/* Munculkan saat Hover (Desktop) */
+@media (min-width: 769px) {
+    .nav-dropdown:hover .dropdown-menu {
+        display: block;
+        animation: fadeIn 0.3s ease;
+    }
+}
+
+/* Responsive untuk Mobile (HP) */
+@media (max-width: 768px) {
+    .dropdown-menu {
+        position: static;
+        display: none;
+        width: 100%;
+        box-shadow: none;
+        background: #f1f1f1;
+        border: none;
+    }
+    
+    .nav-dropdown.active .dropdown-menu {
+        display: block;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   CARD DENGAN HARGA BERTINGKAT & STOK
+   ============================================ */
+
+/* Card Header (untuk gambar & badge) */
+/* ================= CARD CONTAINER ================= */
+#product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(167px, 1fr));
+    gap: 30px;
+}
+
+/* ================= CARD ================= */
+/* .card { 
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: 0.3s ease;
+    display: block;
+} */
+
+
+/* ================= IMAGE ================= */
+/* .card-image { 
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+} */
+
+/* ================= CONTENT ================= */
+/* baru */
+/* .card-content { 
+    padding: 15px;
+}
+
+.card-title { 
+    font-size: 1rem;
+    margin: 8px 0;
+}
+
+.card-desc { 
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+ */
+/* ================= FOOTER ================= */
+.card-footer {
+    margin-top: auto; /* Dorong ke bawah */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    color: #27ae60;
+
+}
+
+.price { /* baru */
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+.btn-buy { /* baru */
+    padding: 6px 12px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-buy:hover { /* baru */
+    background: #2980b9;
+}
+
+/* ================= BADGE ================= */
+/* baru */
+/* .badge { 
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 10px;
+} */
+.stock-tersedia,
+.stock-terbatas,
+.stock-habis {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 10px;
+}
+.badge-tersedia { background-color: #4D8241;  }  /* baru */
+.badge-terbatas { background-color: #f1c40f; color: #333; }
+.badge-habis { background-color: #e74c3c; }
+
+
+/* Badge Stok */
+
+
+.stock-tersedia { 
+    background-color: #2ecc71;  /* Ganti warna di sini */
+}
+
+.stock-terbatas { 
+    background-color: #f39c12;
+    animation: pulse 2s infinite;
+}
+
+.stock-habis { 
+    background-color: #e74c3c;
+    /* animation: pulse 2s infinite; */
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Price Section */
+.price-section {
+    margin-bottom: 1rem;
+}
+
+.price-retail {
+    margin-bottom: 8px;
+}
+
+.price-wholesale {
+    background-color: #e8f5e9;
+    padding: 8px;
+    border-radius: 8px;
+    border-left: 3px solid #27ae60;
+}
+
+.price-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #666;
+    margin-bottom: 2px;
+}
+
+
+.price-grosir {
+    color: #4D8241;
+    font-size: 1rem;
+}
+
+
+.old-price{
+    display: block;
+    color:#999;
+    font-size:12px;
+    text-decoration:line-through;
+    margin-bottom: 2px;
+}
+
+.new-price{
+    display: block;
+    color:#e53935;
+    font-size:20px;
+    font-weight:bold;
+}
+/* Tombol Beli */
+.btn-buy {
+    width: 100%;
+    padding: 12px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-buy:hover:not(:disabled) {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.btn-buy.btn-disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+/* Warning Stok Terbatas */
+.stock-warning {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card-image {
+        height: 150px;
+    }
+    
+    .price {
+        font-size: 1rem;
+    }
+    
+    .price-grosir {
+        font-size: 0.9rem;
+    }
+}
+
+/* Layout Detail */
+#product-detail-view { padding: 20px 0; animation: fadeIn 0.3s; }
+.detail-wrapper { display: flex; gap: 40px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+.detail-image, .detail-content { flex: 1; }
+.detail-image img { width: 100%; border-radius: 8px; }
+.detail-title { font-size: 2rem; color: #2c3e50; margin-bottom: 10px; }
+.price-container { background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+.price-grosir-active { color: #27ae60; font-size: 1.3rem; }
+.action-group { display: flex; align-items: center; gap: 20px; margin-top: 20px; }
+.qty-wrapper { display: flex; border: 1px solid #ddd; border-radius: 5px; }
+.qty-btn { background: #eee; border: none; padding: 10px; cursor: pointer; }
+#qty-input { width: 50px; text-align: center; border: none; }
+.btn-buy-large { background: #e67e22; color: white; border: none; padding: 15px; width: 100%; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 15px; }
+.btn-buy-large:disabled { background: #ccc; cursor: not-allowed; }
