@@ -66,10 +66,10 @@ function formatRupiah(num) {
                             <td><span class="stock-badge ${stockClass}">${stockText}</span></td>
                             <td>
                                 <button class="btn-edit" onclick="editProduct(${p.id})">
-                                <i class="bi bi-box-arrow-up"></i> EDIT</button>
+                                <i class="bi bi-box-arrow-up"></i> Edit</button>
 
                                 <button class="btn-delete" onclick="deleteProduct(${p.id})">
-                                <i class="bi bi-trash3-fill"></i> HAPUS</button>
+                                <i class="bi bi-trash3-fill"></i> Hapus</button>
                             </td>
                         </tr>
                     `;
@@ -258,49 +258,19 @@ Swal.fire({
     };
 
     // Preview Image
-window.previewImage = function(input){
+    window.previewImage = function(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('image-preview');
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                document.getElementById('product-image').value = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    };
 
-if(input.files && input.files[0]){
-
-const file = input.files[0];
-
-const reader = new FileReader();
-
-reader.onload = function(e){
-
-const img = new Image();
-img.src = e.target.result;
-
-img.onload = function(){
-
-const canvas = document.createElement("canvas");
-const maxWidth = 600;
-
-const scale = maxWidth / img.width;
-
-canvas.width = maxWidth;
-canvas.height = img.height * scale;
-
-const ctx = canvas.getContext("2d");
-ctx.drawImage(img,0,0,canvas.width,canvas.height);
-
-const compressed = canvas.toDataURL("image/jpeg",0.7);
-
-const preview = document.getElementById("image-preview");
-preview.src = compressed;
-preview.style.display = "block";
-
-document.getElementById("product-image").value = compressed;
-
-};
-
-};
-
-reader.readAsDataURL(file);
-
-}
-
-};
     // Init
     loadAdminProducts();
 }
@@ -330,7 +300,7 @@ if (document.getElementById('product-container')) {
             // LOGIKA HARGA
         let priceHTML = "";
 
-/*         if(p.oldPrice){
+        if(p.oldPrice){
             priceHTML = `
             <div>
             <span class="old-price">${formatRupiah(p.oldPrice)}</span>
@@ -344,17 +314,9 @@ if (document.getElementById('product-container')) {
             </div>
             
             `;
-        } */
-        {
-            priceHTML = `
-            <div>
-            <span class="new-price">${formatRupiah(p.price)}</span>
-            </div>
-            
-            `;
-        } 
+        }
             container.innerHTML += `
-                <div class="card ${p.stock <= 0 ? 'sold-out' : ''}" data-category="${p.category}" onclick="openModal(${p.id})" style="cursor:pointer;">
+                <div class="card" data-category="${p.category} onclick="openModal(${p.id})" style="cursor:pointer;">
                     <img src="${p.image}" class="card-image">
                     <div class="card-content">
                         ${badge}
@@ -364,6 +326,7 @@ if (document.getElementById('product-container')) {
                         <div class="card-footer">
                              ${priceHTML}
                          </div>
+                         
                     </div>
                 </div>
             `;
@@ -470,44 +433,84 @@ function toggleMenu() {
 // ============================================
 // 5. SEARCH & FILTER
 // ============================================
-        let currentCategory = "all";
-            // --- FUNGSI PENCARIAN (LIVE SEARCH) ---
+    // --- FUNGSI PENCARIAN (LIVE SEARCH) ---
+    
+    // 1. Event Listener agar pencarian jalan saat mengetik (Live Search)
+    document.getElementById('header-search').addEventListener('keyup', function() {
+        searchProducts();
+    });
+
+    // 2. Fungsi Utama Pencarian
+    function searchProducts() {
+        // Ambil nilai dari input
+        let input = document.getElementById('header-search').value.toLowerCase();
+        
+        // Ambil semua kartu produk
+        let cards = document.getElementsByClassName('product-card'); // Pastikan class di HTML Anda adalah 'product-card'
+        
+        // Loop setiap produk
+        for (let i = 0; i < cards.length; i++) {
+            let title = cards[i].querySelector('.product-title'); // Ambil elemen judul produk
+            let desc = cards[i].querySelector('.product-desc');   // Ambil elemen deskripsi (opsional)
             
-            // 1. Event Listener agar pencarian jalan saat mengetik (Live Search)
-        document.getElementById('header-search').addEventListener('keyup', filterProducts);
+            let textValue = "";
+            if (title) textValue = title.innerText.toLowerCase();
+            if (desc) textValue += " " + desc.innerText.toLowerCase();
 
-            // 2. Fungsi Utama Pencarian
-function filterProducts(){
+            // Cek apakah kata kunci ada di judul atau deskripsi
+            if (textValue.indexOf(input) > -1) {
+                cards[i].style.display = ""; // Tampilkan
+            } else {
+                cards[i].style.display = "none"; // Sembunyikan
+            }
+        }
 
-const keyword = document.getElementById("header-search").value.toLowerCase();
-const cards = document.querySelectorAll(".card");
+        // Opsional: Tampilkan pesan jika tidak ada hasil
+        if (input.length > 0) {
+            let totalVisible = 0;
+            for (let i = 0; i < cards.length; i++) {
+                if (cards[i].style.display !== "none") totalVisible++;
+            }
+            
+            if (totalVisible === 0) {
+                // Jika kosong, Anda bisa menampilkan pesan "Produk tidak ditemukan"
+                // Contoh: alert("Produk tidak ditemukan!");
+            }
+        }
+    }
+/* function searchProducts() {
+    const input = document.getElementById('search-input').value.toLowerCase();
+    const cards = document.querySelectorAll('.card');
+    
+    cards.forEach(card => {
+        const title = card.querySelector('.card-title').innerText.toLowerCase();
+        const desc = card.querySelector('.card-desc').innerText.toLowerCase();
+        
+        if (title.includes(input) || desc.includes(input)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+} */
 
-cards.forEach(card => {
+        function filterCategory(category){
 
-const title = card.querySelector(".card-title").innerText.toLowerCase();
-const desc = card.querySelector(".card-desc").innerText.toLowerCase();
-const category = card.dataset.category.toLowerCase();
+        const cards = document.querySelectorAll('.card');
 
-const matchSearch = title.includes(keyword) || desc.includes(keyword);
-const matchCategory = currentCategory === "all" || category === currentCategory.toLowerCase();
+        cards.forEach(card => {
 
-if(matchSearch && matchCategory){
-card.style.display = "block";
-}else{
-card.style.display = "none";
-}
+        const cardCategory = card.dataset.category;
 
-});
+        if(category === "all" || cardCategory === category){
+        card.style.display = "block";
+        }else{
+        card.style.display = "none";
+        }
 
-}
+        });
 
-function filterCategory(category){
-
-currentCategory = category;
-
-filterProducts();
-
-}
+        }
 // ============================================
 // 6. AUTH CHECK (Opsional)
 // ============================================
@@ -530,4 +533,96 @@ function logout() {
     location.reload();
 }
 
-/* SWIPE DETECTION */
+    // --- VARIABEL GLOBAL UNTUK FILTER ---
+    let currentCategory = 'all'; // Kategori default
+
+    // --- FUNGSI FILTER KATEGORI ---
+    function filterCategory(category) {
+        currentCategory = category; // Simpan kategori yang dipilih
+        
+        // 1. Update Status Aktif pada Tombol
+        updateActiveButton(category);
+        
+        // 2. Render ulang produk dengan filter kategori
+        renderUserCatalog();
+    }
+
+    // --- FUNGSI UPDATE TOMBOL AKTIF ---
+    function updateActiveButton(category) {
+        // Hapus class 'active' dari semua tombol
+        let buttons = document.querySelectorAll('.btn-outline');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        
+        // Tambahkan class 'active' ke tombol yang diklik
+        // (Asumsi tombol punya onclick="filterCategory('...')")
+        let activeBtn = document.querySelector(`button[onclick="filterCategory('${category}')"]`);
+        if (activeBtn) {
+            activeBtn.classList.add('active');
+        }
+    }
+
+    // --- FUNGSI PENCARIAN (LIVE SEARCH) ---
+    function searchProducts() {
+        let input = document.getElementById('header-search').value.toLowerCase();
+        let cards = document.getElementsByClassName('product-card');
+        
+        for (let i = 0; i < cards.length; i++) {
+            let title = cards[i].querySelector('.product-title');
+            let desc = cards[i].querySelector('.product-desc');
+            let category = cards[i].getAttribute('data-category'); // Asumsi ada atribut data-category
+            
+            let textValue = "";
+            if (title) textValue = title.innerText.toLowerCase();
+            if (desc) textValue += " " + desc.innerText.toLowerCase();
+
+            // LOGIKA PENTING: Cek KATA KUNCI DAN KATEGORI
+            let matchesSearch = textValue.indexOf(input) > -1;
+            let matchesCategory = (category === currentCategory) || (currentCategory === 'all');
+
+            if (matchesSearch && matchesCategory) {
+                cards[i].style.display = ""; // Tampilkan
+                cards[i].classList.add('animate-product'); // Tambah animasi
+            } else {
+                cards[i].style.display = "none"; // Sembunyikan
+                cards[i].classList.remove('animate-product'); // Hapus animasi
+            }
+        }
+    }
+
+    // --- FUNGSI RENDER PRODUK DENGAN ANIMASI ---
+    function renderUserCatalog() {
+        // Asumsi Anda punya array produk 'products' di script.js
+        // Contoh: const products = [...];
+        
+        let container = document.getElementById('product-container');
+        container.innerHTML = ''; // Bersihkan container
+
+        // Filter produk berdasarkan kategori dulu
+        let filteredProducts = products.filter(p => {
+            return currentCategory === 'all' || p.category === currentCategory;
+        });
+
+        // Render produk
+        filteredProducts.forEach((product, index) => {
+            let card = document.createElement('div');
+            card.className = 'product-card animate-product'; // Tambah class animasi
+            card.setAttribute('data-category', product.category); // Simpan kategori
+            
+            // Isi HTML card (Sesuaikan dengan struktur card Anda)
+            card.innerHTML = `
+                <img src="${product.image}" class="product-img" alt="${product.name}">
+                <div class="card-body">
+                    <h6 class="product-title">${product.name}</h6>
+                    <p class="product-desc">${product.description}</p>
+                    <p class="price">Rp ${product.price.toLocaleString()}</p>
+                    <button class="btn btn-outline-primary btn-sm w-100" onclick="openModal(${product.id})">Lihat Detail</button>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    // --- EVENT LISTENER SEARCH ---
+    document.getElementById('header-search').addEventListener('keyup', function() {
+        searchProducts();
+    });

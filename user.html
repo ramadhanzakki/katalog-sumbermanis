@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
+    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toko Sumber Manis</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="shortcut icon" href="/foto/logomitra.png" type="foto/logomitra.png">    
     <style>
+        html, body{
+            overscroll-behavior: none;
+        }
         
         /* --- CSS MODAL (FIXED) --- */
         .modal-overlay {
@@ -120,16 +124,16 @@
             color: #7f8c8d;
         }
 
-        .price-val {
+        .price-val { /* warna angka harga satuan (modal) */
             font-size: 1.2rem;
             font-weight: bold;
             color: #2c3e50;
         }
 
-        .price-grosir {
-            color: #27ae60;
-            font-size: 1.4rem;
-            font-weight: 800;
+        .price-grosir { /* warna angka Harga Grosir (modal) */
+            color: #CC0000;
+            font-size: 1.3rem;
+            /* font-weight: 800; */
         }
 
         .qty-wrapper {
@@ -190,6 +194,179 @@
             .modal-content { flex-direction: column; margin: 10% auto; }
             .modal-left img { max-height: 300px; }
         }
+        /* --- STYLE SEARCH BAR BARU (ICON DI LUAR) --- */
+       /* --- STYLE SEARCH BAR BARU (ICON DI LUAR) --- */
+        
+        /* Wrapper untuk menampung input dan ikon */
+        .search-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px; /* Jarak antara input dan ikon */
+            /* max-width: 400px; */
+            margin-right: 15px auto 0;
+            flex: 1;
+            border-radius: 10px;
+            border: 1px ridge #00000018;
+            max-width: none;
+        }
+        
+        /* Container Input */
+        .search-container {
+            flex: 1; /* Agar input mengisi sisa ruang */
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 6px 15px;
+            border: 1px solid #eee;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            /* transition: all 0.3s ease; */
+        }
+
+        .search-container:focus-within {
+            /* box-shadow: 0 4px 20px #5aa8b7; */
+            border-color: #C23B33;
+        }
+
+        .search-input {
+            width: 100%;
+            border: none;
+            outline: none;
+            padding: 5px 0;
+            font-size: 1rem;
+            color: #333;
+            background: transparent;
+        }
+
+        /* Tombol Ikon (Dipisah dari input) */
+        .search-icon-btn {
+            background: #5aa8b7;
+            color: white;
+            border: none;
+            border-radius: 10px; /* Radius sama dengan input */
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .search-icon-btn {
+    transition: all 0.3s ease;
+}
+
+.search-icon-btn:hover {
+    color: #000000;
+}
+        /* Responsif untuk Mobile */
+        @media (max-width: 768px) {
+            .search-wrapper {
+                max-width: 100%;
+            }
+            .search-icon-btn {
+                width: 40px;
+                height: 40px;
+            }
+        }
+/*         .search-container:hover{
+        transform:scale(1.02);
+        } */
+        
+        /* GANTI CSS BANNER INI */
+.banner-slide img {
+    width: 500px !important;  /* LEBAR 500px */
+    height: 250px !important; /* TINGGI 250px */
+    object-fit: cover;
+    border-radius: 20px;
+    flex-shrink: 0; /* Jangan menyusut */
+}
+
+/* Container carousel juga disesuaikan */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 1040px; /* 500px x 2 + gap 20px + padding */
+    margin: 50px auto;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.banner-slide {
+    display: flex;
+    gap: 20px;
+    min-width: 1040px; /* Sesuai total lebar */
+    height: 250px; /* Tinggi tetap */
+}
+
+/* Responsive untuk mobile */
+@media (max-width: 1100px) {
+    .banner-slide img {
+        width: 48% !important; /* Responsive */
+        max-width: 500px;
+    }
+    .banner-slide {
+        min-width: 100%;
+    }
+}
+
+                    /* Tombol navigasi */
+         .carousel-container:hover #banner-prev,
+        .carousel-container:hover #banner-next{
+        opacity:1;
+        }
+            #banner-prev,
+            #banner-next{
+            position:absolute;
+            top:50%;
+            transform:translateY(-50%);
+            background:rgba(0,0,0,0.5);
+            color:white;
+            border:none;
+            font-size:28px;
+            padding:8px 20px;
+            cursor:pointer;
+            border-radius:100%;
+
+            opacity:0;               /* awalnya disembunyikan */
+            transition:0.3s;         /* animasi muncul */
+              }
+
+            #banner-prev{ left:10px; }
+            #banner-next{ right:30px; }
+
+            /* Dot Indicator */
+            #carousel-dots{
+                text-align:center;
+                margin-top:15px;
+            }
+
+            .dot{
+            display:inline-block;
+            width:10px;
+            height:10px;
+            background:#bbb;
+            border-radius:50%;
+            margin:0 6px;
+            cursor:pointer;
+            transition:0.3s;
+            }
+
+            .dot.active{
+            background:#ff6a00;
+            transform:scale(1.2);
+           }
+
+           .section-header h2 {
+  margin-bottom: 4px;
+}
+
+.section-header p {
+  margin: 0;
+  color: #888;
+  font-size: 14px;
+}
+           
     </style>
 </head>
 <body>
@@ -199,7 +376,7 @@
         <div class="header-content">
             <div class="header-left">
                 <a href="login.html" class="navbar-brand">
-                    <img src="/foto/logomitra.png" alt="Logo" style="height: 80px;">
+                    <img src="foto/logomitra.png" alt="Logo" style="height: 80px;">
                 </a>
             </div>
             <div class="header-center">
@@ -215,20 +392,30 @@
     
     <!-- NAVBAR -->
     <nav class="navbar">
-        <a href="user.html" class="navbar-brand">Sumber<span>Manis</span></a>
+        <a href="testuser.html" class="navbar-brand">Sumber<span>Manis</span></a>
+        <div class="search-wrapper">
+            <!-- Input Field -->
+            <div class="search-container">
+                <input type="text" id="header-search" class="search-input" placeholder="Cari Produk di Sumber Manis">
+            </div>
+            <div class="search-icon-btn" onclick="searchProducts()">
+                <i class="bi bi-search"></i>
+            </div>
+
+            <!-- Ikon Pencarian (Dipisah) -->
+        </div>
         <ul class="nav-menu" id="nav-menu">
             <li><a href="user.html" class="nav-link active"><i class="bi bi-house-fill"></i> Beranda</a></li>
             <li><a href="#katalogProduk" class="nav-link"><i class="bi bi-box-seam-fill"></i> Produk</a></li>
-            <li><a href="#tentang" class="nav-link"><i class="bi bi-info-circle-fill"></i> Tentang</a></li>
             <li class="nav-dropdown">
                 <a href="javascript:void(0)" class="nav-link dropdown-toggle"><i class="bi bi-telephone-fill"></i> Kontak ▾</a>
                 <ul class="dropdown-menu">
                     <li><a href="https://wa.link/xqaqlb" target="_blank"><i class="bi bi-whatsapp"></i> WhatsApp Admin</a></li>
                     <li><a href="https://instagram.com/xszhull" target="_blank"><i class="bi bi-instagram"></i> Instagram</a></li>
-                    <li><a href="shopee.co.id/bosssumbermanis"><i class="bi bi-bag-plus-fill"></i> Shopee</a></li>
+                    <li><a href="https://shopee.co.id/bosssumbermanis"><i class="bi bi-bag-plus-fill"></i> Shopee</a></li>
                 </ul>
             </li>
-            <li><a href="https://forms.gle/PURRVfCN7dYMXFzP6" class="nav-link">Ulasan</a></li>
+            <li><a href="#tentang" class="nav-link"><i class="bi bi-info-circle-fill"></i> Tentang</a></li>
         </ul>
             </li>
         <button class="hamburger" onclick="toggleMenu()">
@@ -239,36 +426,53 @@
    <!-- MAIN CONTENT -->
     <main id="catalog">
         <!-- Banner -->
-<div class="hero-banner">
+    <div class="carousel-container">
 
-    <!-- GIF Background -->
-    <img src="GifSM.gif" class="hero-bg" alt="Banner">
+    <div id="banner-track" style="display:flex;transition:transform 0.7s ease-in-out;"></div>
 
-    <!-- Overlay -->
-    <div class="hero-overlay"></div>
-
-    <!-- Text -->
-    <div class="hero-content">
-        <h2>Selamat Datang di Toko kami</h2>
-        <p>Temukan produk terbaik dengan harga terjangkau</p>
-        <a href="#katalogProduk" class="btn btn-primary" id="blj"><i class="bi bi-bag-heart-fill"></i> Belanja Sekarang</a>
-    </div>
-
+    
+    <!-- tombol kiri -->
+    <button id="banner-prev">
+        ❮
+    </button>
+    
+    <!-- tombol kanan -->
+    <button id="banner-next">
+        ❯
+    </button>
 </div>
+<div id="carousel-dots"></div>
+    
+
 
         <div class="catalog-header" id="katalogProduk">
-            <h2 style="color: var(--dark);"><i class="bi bi-box-seam-fill"></i> Katalog Produk Terbaru</h2>
-            <div class="search-box">
-                <input type="text" id="search-input"  placeholder="Cari produk..." onkeyup="searchProducts()">
+            <div class="section-header">
+                <h2  style="color: var(--dark);"><i class="bi bi-box-seam-fill"></i> Produk</h2><br>
+                <p style="margin-top: -10px; color: gray;">
+                Temukan berbagai kebutuhan harian Anda
+                </p>
             </div>
+            <!-- <div class="search-box collapse">
+                <input type="text" id="search-input"  placeholder="Cari produk..." onkeyup="searchProducts()">
+                <input class="form-control search-box" type="search" placeholder="Cari produk..." aria-label="Search">
+                <form class="d-flex mx-auto w-50">
+                <button class="btn search-btn" type="submit"><i class="fas fa-search"></i></button>
+                </form>            
+            </div> -->
+            <!-- <div class="search-container">
+                    <input type="text" id="header-search" class="search-input" placeholder="Cari produk (misal: Minyak, Gula...)">
+                    <button class="search-btn" onclick="searchProducts()">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div> -->
         </div>
         
         <!-- Filter Kategori -->
         <div style="margin-bottom: 2rem; display: flex; gap: 10px; flex-wrap: wrap;">
-            <button class="btn btn-outline active" onclick="filterCategory('all')">Semua</button>
-            <button class="btn btn-outline" onclick="filterCategory('Bahan Dapur')">Bahan Dapur</button>
-            <button class="btn btn-outline" onclick="filterCategory('Minuman')">Minuman</button>
-            <button class="btn btn-outline" onclick="filterCategory('Pembersih')">Pembersih</button>
+            <button class="btn btn-outline active" onclick="filterCategory('all')"><i class="bi bi-grid"></i>  Semua</button>
+            <button class="btn btn-outline" onclick="filterCategory('Bahan Dapur')"> <i class="bi bi-basket"></i> Bahan Dapur</button>
+            <button class="btn btn-outline" onclick="filterCategory('Minuman')"><i class="bi bi-cup-straw"></i> Minuman</button>
+            <button class="btn btn-outline" onclick="filterCategory('Pembersih')"><i class="bi bi-droplet"></i> Pembersih</button>
             <!-- <button class="btn btn-outline" onclick="filterCategory('Tas')">Tas</button> -->
         </div>
 
@@ -335,11 +539,102 @@
     <!-- ============================================ -->
     <!-- AKHIR MODAL -->
     <!-- ============================================ -->
-
-    <script src="script.js">
-        renderUserCatalog();
-        checkAuth();
-        
+    <script src="script.js">    
     </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('User page loaded');
+    showBanners();
+    
+    // Navigasi
+    document.getElementById('banner-prev').onclick = prevBanner;
+    document.getElementById('banner-next').onclick = nextBanner;
+    
+    // Auto slide
+    setInterval(nextBanner, 4000);
+});
+
+let currentSlide = 0;
+
+function showBanners() {
+    const banners = JSON.parse(localStorage.getItem('banners') || '[]');
+    const track = document.getElementById('banner-track');
+    const dots = document.getElementById('carousel-dots');
+    
+    console.log('Banners found:', banners.length);
+    
+    track.innerHTML = '';
+    dots.innerHTML = '';
+    
+    if (banners.length === 0) {
+        track.innerHTML = '<div style="width:100%;height:250px;background:#f0f0f0;border-radius:20px;display:flex;align-items:center;justify-content:center;color:#999;border:2px dashed #ddd;">Tidak ada banner</div>';
+        return;
+    }
+    
+    // 2 banner per slide
+    for (let i = 0; i < banners.length; i += 2) {
+        const slide = document.createElement('div');
+        slide.className = 'banner-slide';
+        slide.style.display = 'flex';
+        slide.style.gap = '20px';
+        
+        // Banner 1
+        const img1 = document.createElement('a');
+        img1.href = banners[i].link;
+        img1.target = '_blank';
+        img1.innerHTML = `<img src="${banners[i].image}" style="flex:1;height:250px;object-fit:cover;border-radius:20px;">`;
+        slide.appendChild(img1);
+        
+        // Banner 2
+        if (banners[i+1]) {
+            const img2 = document.createElement('a');
+            img2.href = banners[i+1].link;
+            img2.target = '_blank';
+            img2.innerHTML = `<img src="${banners[i+1].image}" style="flex:1;height:250px;object-fit:cover;border-radius:20px;">`;
+            slide.appendChild(img2);
+        } else {
+            const empty = document.createElement('div');
+            empty.style.cssText = 'flex:1;height:250px;background:#f8f9fa;border-radius:20px;display:flex;align-items:center;justify-content:center;color:#999;border:1px dashed #ddd;';
+            empty.textContent = 'Kosong';
+            slide.appendChild(empty);
+        }
+        
+        track.appendChild(slide);
+        
+        // Dot
+        const dot = document.createElement('span');
+        dot.className = i === 0 ? 'dot active' : 'dot';
+        dot.onclick = () => currentSlide = i/2;
+        dots.appendChild(dot);
+    }
+    
+    updateCarousel();
+}
+
+function updateCarousel() {
+    const track = document.getElementById('banner-track');
+    const slides = document.querySelectorAll('.banner-slide');
+    const dots = document.querySelectorAll('.dot');
+    
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    
+    dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+    });
+}
+
+function nextBanner() {
+    const slides = document.querySelectorAll('.banner-slide');
+    currentSlide = (currentSlide + 1) % slides.length;
+    updateCarousel();
+}
+
+function prevBanner() {
+    const slides = document.querySelectorAll('.banner-slide');
+    currentSlide = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+    updateCarousel();
+}
+</script>
 </body>
 </html>

@@ -77,7 +77,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-left: auto;
             margin-bottom: 2rem;
             flex-wrap: wrap;
             gap: 1rem;
@@ -322,8 +321,8 @@
         background: #5aa8b7;
         color:white;
         }
-/*  */
 
+        
         .btn-lihat {
             padding: 10px 20px;
             text-decoration: none;
@@ -349,8 +348,8 @@
                 <i class="bi bi-database-fill-gear"></i> Dasboard<span>SM</span>
             </div>
             <ul class="sidebar-menu">
-                <li><a href="#" class="active" onclick="showSection('products')"><i class="bi bi-box-seam-fill"></i> Kelola Produk</a></li>
-                <li><a href="banner.html" onclick="showSection('banner')"><i class="bi bi-file-richtext"></i> Kelola Banner</a></li>
+                <li><a href="admin.html" class="active" onclick="showSection('products')"><i class="bi bi-box-seam-fill"></i> Kelola Produk</a></li>
+                <li><a href="#" onclick="showSection('banner')"><i class="bi bi-file-richtext"></i> Kelola Banner</a></li>
 <!--                 <li><a href="#"><i class="bi bi-clipboard2-data-fill"></i> Daftar Produk</a></li>
                 <li><a href="#" onclick="showSection('reports')"><i class="bi bi-kanban-fill"></i> Laporan</a></li> -->
                 <li style="margin-top: auto;"><a href="login.html"><i class="bi bi-door-closed-fill"></i> Keluar</a></li>
@@ -358,126 +357,186 @@
         </aside>
 
         <!-- MAIN CONTENT -->
+        <!-- FORM TAMBAH BANNER - Pindah ke dalam admin-content -->
         <div class="admin-content">
             <div class="admin-header">
-                <h2><i class="bi bi-box-seam-fill"></i> Kelola Data Produk</h2>
-                <a href="user.html" class="btn-lihat" class="btn btn-outline" style=" text-decoration: none; border: 2px solid #83adb5; font-weight: bold; color: #ffffff; border-radius: 8px; background-color: #5aa8b7;"><i class="bi bi-shop"></i> Lihat Website</a>
+                <h2><i class="bi bi-file-richtext"></i> Kelola Banner Produk</h2>
+                <a href="user.html" class="btn-lihat" class="btn btn-outline" style="padding: 10px 20px; text-decoration: none; border: 2px solid #83adb5; font-weight: bold; color: #ffffff; border-radius: 8px; background-color: #5aa8b7;"><i class="bi bi-shop"></i> Lihat Website</a>
             </div>
 
             <!-- STATS -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <h3 id="total-products">0</h3>
-                    <p>Total Produk</p>
+                    <h3 id="total-banners">0</h3>
+                    <p>Total Banner</p>
                 </div>
                 <div class="stat-card">
-                    <h3 id="total-stock">0</h3>
-                    <p>Total Stok</p>
+                    <h3 id="max-banners">6</h3> <!-- Ubah jadi 6 sesuai keinginanmu -->
+                    <p>Batas Maksimal</p>
                 </div>
                 <div class="stat-card">
-                    <h3 id="low-stock">0</h3>
-                    <p>Stok Menipis</p>
-                </div>
-                <div class="stat-card">
-                    <h3 id="out-of-stock">0</h3>
-                    <p>Stok Habis</p>
+                    <h3 id="remaining-banners">6</h3>
+                    <p>Sisa Slot Banner</p>
                 </div>
             </div>
 
-            <!-- FORM TAMBAH/EDIT PRODUK -->
+            <!-- FORM TAMBAH BANNER -->
             <div class="form-container">
-                <h3 id="form-title"><i class="bi bi-plus-square-fill"></i> Tambah Produk Baru</h3>
-                <form id="product-form">
-                    <input type="hidden" id="product-id">
-                    <div id="alert-container">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label><i class="bi bi-pencil-square"></i> Nama Produk</label>
-                            <input type="text" id="product-name" placeholder="Contoh: Sepatu Running" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label><i class="bi bi-card-list"></i> Kategori</label>
-                            <select id="product-category" required>
-                                <option value="">Pilih Kategori</option>
-                                <option value="Makanan">Makanan</option>
-                                <option value="Minuman">Minuman</option>
-                                <option value="Pakaian">Bumbu-Bumbu</option>
-                                <option value="Bahan Dapur">Bahan Dapur</option>
-                                <option value="Aksesoris">Aksesoris</option>
-                                <option value="Pembersih">Pembersih</option>
-                                <option value="Lainnya">Lainnya</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label><i class="bi bi-tag-fill"></i> Harga Retail (Rp)</label>
-                            <input type="number" id="product-price" placeholder="Contoh: 550000" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label><i class="bi bi-tags-fill"></i> Harga Grosir (Rp)</label>
-                            <input type="number" id="product-wholesale-price" placeholder="Contoh: 500000">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label><i class="bi bi-plus-slash-minus"></i> Jumlah Min. Grosir</label>
-                            <input type="number" id="product-wholesale-qty" placeholder="Contoh: 5" value="5">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label><i class="bi bi-boxes"></i> Stok</label>
-                            <input type="number" id="product-stock" placeholder="Contoh: 100" required>
-                        </div>
-                        
-                        <div class="form-group full-width">
-                            <label><i class="bi bi-info-lg"></i> Deskripsi Produk</label>
-                            <textarea id="product-desc" rows="3" placeholder="Deskripsi produk..."></textarea>
-                        </div>
-                        
-                        <div class="form-group full-width">
-                            <label><i class="bi bi-images"></i> Upload Gambar</label>
-                            <input type="file" id="product-image-file" class="bi bi-file-earmark-image-fill" accept="image/*" onchange="previewImage(this)">
-                            <input type="hidden" id="product-image" value="">
-                            <img id="image-preview" src="" style="max-width: 200px; margin-top: 10px; display: none;">
-                        </div>
+                <h3><i class="bi bi-plus-circle"></i> Tambah Banner Baru</h3>
+                <P>NOTE: sebelum memasukan banner, pastikan ukuran banner adalah 500 x 250 px<i class="bi bi-exclamation-lg"></i><i class="bi bi-emoji-laughing"></i></P>
+                <form id="banner-form">
+                    <div class="form-group">
+                        <label><i class="bi bi-images"></i> Upload Gambar Banner</label>
+                        <input type="file" id="banner-image" style="cursor: pointer;" class="bi bi-file-earmark-image-fill" accept="image/*">
+                    </div>
+                    <img id="banner-preview" style="max-width:300px; max-height:150px; border-radius:8px; margin-top:10px; display:none; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
+                    
+                    <div class="form-group">
+                        <label><i class="bi bi-link-45deg"></i> Link Banner</label>
+                        <input type="url" id="banner-link" placeholder="contoh: user.html atau https://example.com" class="form-control">
                     </div>
                     
-                    <div style="margin-top: 1rem; display: flex; gap: 10px;">
-                        <button type="submit" class="btn-submit" id="submit-btn"><i class="bi bi-upload"></i>  Simpan Produk</button>
-                        <button type="button" class="btn-cancel" id="cancel-btn" onclick="cancelEdit()" style="display:none;"><i class="bi bi-x-circle-fill"></i> Batal</button>
-                    </div>
-                    </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="bi bi-upload"></i> Upload Banner
+                    </button>
                 </form>
             </div>
-            
-            <!-- TABEL DAFTAR PRODUK -->
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Gambar</th>
-                            <th>Nama Produk</th>
-                            <th>Kategori</th>
-                            <th>Harga Retail</th>
-                            <th>Harga Grosir</th>
-                            <th>Stok</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="product-table-body">
-                        <!-- Data produk akan dimuat di sini -->
-                    </tbody>
-                </table>
+
+            <!-- DAFTAR BANNER -->
+            <div class="form-container">
+                <h3><i class="bi bi-list-ul"></i> Daftar Banner</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Preview</th>
+                                <th>Link Banner</th>
+                                <th>Tanggal</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="banner-list">
+                            <!-- Banner akan di-render di sini -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div id="pagination" class="pagination"></div>
-        </div>
-    </div>
-    
+        </div> <!-- Tutup admin-content -->
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+let maxBanners = 6;
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Banner admin loaded');
+    loadBanners();
+    
+    // Form upload
+    document.getElementById('banner-form').onsubmit = addBanner;
+    
+    // Preview gambar
+    document.getElementById('banner-image').onchange = previewImage;
+});
+
+function previewImage() {
+    const file = this.files[0];
+    const preview = document.getElementById('banner-preview');
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = e => {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+function addBanner(e) {
+    e.preventDefault();
+    console.log('Add banner clicked');
+    
+    const file = document.getElementById('banner-image').files[0];
+    const link = document.getElementById('banner-link').value;
+    
+    if (!file) return alert('Pilih gambar!');
+    if (!link) return alert('Masukkan link!');
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        let banners = JSON.parse(localStorage.getItem('banners') || '[]');
+        
+        if (banners.length >= maxBanners) {
+            return alert('Maksimal 6 banner!');
+        }
+        
+        banners.unshift({
+            id: Date.now(),
+            image: e.target.result,
+            link: link,
+            date: new Date().toLocaleDateString()
+        });
+        
+        localStorage.setItem('banners', JSON.stringify(banners));
+        loadBanners();
+        
+        // Reset form
+        document.getElementById('banner-image').value = '';
+        document.getElementById('banner-link').value = '';
+        document.getElementById('banner-preview').style.display = 'none';
+        
+        alert('✅ Banner berhasil ditambahkan!');
+    };
+    reader.readAsDataURL(file);
+}
+
+function loadBanners() {
+    const banners = JSON.parse(localStorage.getItem('banners') || '[]');
+    const tbody = document.getElementById('banner-list');
+    
+    document.getElementById('total-banners').textContent = banners.length;
+    document.getElementById('remaining-banners').textContent = maxBanners - banners.length;
+    
+    if (banners.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:20px;color:#999;">📭 Belum ada banner</td></tr>';
+        return;
+    }
+    
+    tbody.innerHTML = banners.map(b => `
+        <tr>
+            <td><img src="${b.image}" style="width:50px;height:35px;object-fit:cover;border-radius:4px;"></td>
+            <td style="font-size:13px;max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${b.link}</td>
+            <td style="font-size:12px;color:#666;">${b.date}</td>
+            <td>
+                <button onclick="editBanner(${b.id})" style="background:#f39c12;color:white;border:none;padding:4px 8px;border-radius:4px;font-size:11px;cursor:pointer;margin-right:5px;"><i class="bi bi-pencil-square"></i> EDIT</button>
+                <button onclick="deleteBanner('${b.id}')" style="background:#e74c3c;color:white;border:none;padding:4px 8px;border-radius:4px;font-size:11px;cursor:pointer;"><i class="bi bi-trash3-fill"></i> HAPUS</button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function deleteBanner(id) {
+    if (confirm('Hapus banner ini?')) {
+        let banners = JSON.parse(localStorage.getItem('banners') || '[]');
+        banners = banners.filter(b => b.id != id);
+        localStorage.setItem('banners', JSON.stringify(banners));
+        loadBanners();
+    }
+}
+
+function editBanner(id) {
+    const banners = JSON.parse(localStorage.getItem('banners') || '[]');
+    const banner = banners.find(b => b.id == id);
+    const newLink = prompt('Edit link:', banner.link);
+    if (newLink !== null && newLink.trim()) {
+        banner.link = newLink.trim();
+        localStorage.setItem('banners', JSON.stringify(banners));
+        loadBanners();
+    }
+}
+</script>
 
 </body>
 </html>

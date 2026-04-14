@@ -2,16 +2,7 @@
    RESET & BASE STYLES
    ============================================ */
 
-   .hero-banner {
-    position: relative;
-    height: 400px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-}
+
 
 .hero-bg {
     position: absolute;
@@ -42,7 +33,7 @@
         /* --- CSS SAMA DENGAN KAMU --- */
         body { font-family: sans-serif; background: #f4f4f4; }
         .header { background: white; padding: 15px; text-align: center; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 20px; max-width: 1000px; margin: 0; }
+        /* .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 20px; max-width: 1000px; margin: 0; } */
 
         /* --- CSS MODAL (WAJIB ADA) --- */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; }
@@ -50,7 +41,7 @@
         .modal-close { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; }
         .modal-left img { width: 200px; height: 200px; object-fit: cover; }
         .modal-right { flex: 1; }
-        .price-box { background: #ff0000; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .price-box { background: #060606; padding: 10px; margin: 10px 0; border-radius: 5px; }
 
 :root {
     --primary: #5aa8b7;
@@ -67,6 +58,16 @@
     --border: #e0e0e0;
     --shadow: 0 2px 10px rgba(0,0,0,0.1);
     --shadow-hover: 0 10px 30px rgba(0,0,0,0.15);
+}
+.btn-outline-primary {
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background-color: #0d6efd; /* biru bootstrap */
+    color: white;
+    transform: translateY(-2px); /* efek naik dikit */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
 body {
@@ -186,6 +187,7 @@ ul {
     height: 65px;
     position: sticky;
     top: 0;
+    gap: 20px;
     z-index: 1000;
 }
 
@@ -314,9 +316,14 @@ ul {
     text-align: center;
     border-radius: 15px;
     margin-bottom: 3rem;
-    
-}
 
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .hero-banner h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
@@ -369,8 +376,9 @@ ul {
 }
 .btn-outline {
     background-color: transparent;
+     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     border: 1rcap solid #5aa8b7;
-    color: #5aa8b7
+    color: #5aa8b7 
 }
 
 .btn-outline:hover {
@@ -831,11 +839,7 @@ ul {
 
 
 /* --- PRODUCT GRID --- */
- .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 2rem;
-}
+
 
 .card {
     background: white;
@@ -845,6 +849,10 @@ ul {
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
+
+    min-width:200px;
+    max-width:200px;
+
 }
 
 .card:hover {
@@ -872,22 +880,28 @@ padding: 18px;
     gap: 8px; /* Jarak antar elemen */
 }
 
-.card-title {
-    font-size: 1.05rem;
-    font-weight: 600;
-    margin: 4px 0;
-    line-height: 1.3;
+
+.card-title{
+font-size: 1.05rem;
+font-weight:600;
+margin-bottom:6px;
+
+display:-webkit-box;
+-webkit-line-clamp:2;
+-webkit-box-orient:vertical;
+
+overflow:hidden;
 }
+.card-desc{
+font-size:0.87rem;
+color:#666;
+line-height:1.4;
 
-.card-desc {
-    font-size: 0.85rem;
-    color: #777;
-    line-height: 1.4;
-    min-height: 38px; /* Supaya tinggi konsisten */
+display:-webkit-box;
+-webkit-line-clamp:2;
+-webkit-box-orient:vertical;
 
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+overflow:hidden;
 }
 
 
@@ -900,10 +914,7 @@ padding: 18px;
     cursor: pointer;
 }
 
-.btn-buy:hover {
-    background-color: #2980b9;
-}
- 
+
 
 /* --- HAMBURGER BUTTON --- */
 .hamburger {
@@ -948,14 +959,6 @@ main {
     width: 100%;
 }
 
-.hero-banner {
-    background: linear-gradient(135deg, #3498db, #2c3e50);
-    color: white;
-    padding: 3rem 2rem;
-    text-align: center;
-    border-radius: 15px;
-    margin-bottom: 2rem;
-}
 
 .catalog-header { margin-bottom: 2rem; }
 
@@ -968,8 +971,20 @@ main {
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
+    text-align: center;
+}
+.btn-outline{
+  position: relative;
+  text-align: center; /* teks tetap tengah */
+  padding: 9px 35px;
 }
 
+.btn i {
+  position: absolute;
+  left: 12px; /* posisi icon di kiri */
+  top: 50%;
+  transform: translateY(-50%);
+}
 /* --- PRODUCT GRID --- */
 
 .card {
@@ -978,16 +993,12 @@ main {
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: transform 0.3s;
-
+    position: relative;
     display: flex; 
     flex-direction: column; 
     height: 100%;
 }
 
-/* .card-content { padding: 1.5rem; } */
-.card-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 0.5rem; }
-.card-desc { font-size: 0.9rem; color: #666; margin-bottom: 1rem; }
-/* .card-footer { display: flex; justify-content: space-between; align-items: center; } */
 .btn-buy {
     background-color: var(--primary);
     color: white;
@@ -1010,25 +1021,16 @@ footer {
    RESPONSIVE (HP) - HAMBURGER MENU KE KIRI
    ============================================ */
 /* Default untuk Layar Besar (PC/Laptop) - 4 Kolom */
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
+
 
 /* Untuk Layar Tablet - 3 Kolom */
 @media (max-width: 1024px) {
-    .product-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+
 }
 
 /* Untuk Layar HP - 2 Kolom */
 @media (max-width: 600px) {
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px; /* Jarak lebih kecil di HP */
-    }
+
 }
 @media (max-width: 768px) {
     .header-content { flex-direction: column; gap: 10px; }
@@ -1036,6 +1038,7 @@ footer {
     .header-right { display: none; }
     
     .navbar { padding: 0 1rem; }
+    
     .navbar-brand-mobile {
         display: block;
         font-size: 1.3rem;
@@ -1077,15 +1080,28 @@ footer {
         border-bottom: 1px solid rgba(255,255,255,0.1);
     }
     
-    .product-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    
     /* .card-image { height: 100px; } */
     /* .card-content { padding: 0.5rem; } */
 }
+.product-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+gap:20px;
+margin-bottom:40px;
+}
+
+.product-grid::-webkit-scrollbar{
+height:6px;
+}
+
+.product-grid::-webkit-scrollbar-thumb{
+background:#ccc;
+border-radius:10px;
+}
         /* --- RESPONSIVE --- */
         @media (max-width: 600px) {
-            .product-grid {
-                grid-template-columns: 1fr; /* 1 kolom di HP */
-            }
+
 
         }
     #qris-container {
@@ -1114,7 +1130,7 @@ footer {
 /* Card untuk User */
 .card-content { padding: 1.5rem; }
 .card-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem; }
-.card-desc { font-size: 0.9rem; color: #666; margin-bottom: 1rem; }
+/* .card-desc { font-size: 0.9rem; color: #666; margin-bottom: 1rem; } */
 .price { font-size: 1.1rem; font-weight: bold; color: #27ae60; }
 .btn-buy { background-color: #3498db; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; }
 
@@ -1200,41 +1216,7 @@ footer {
     gap: 30px;
 }
 
-/* ================= CARD ================= */
-/* .card { 
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    overflow: hidden;
-    transition: 0.3s ease;
-    display: block;
-} */
 
-
-/* ================= IMAGE ================= */
-/* .card-image { 
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-} */
-
-/* ================= CONTENT ================= */
-/* baru */
-/* .card-content { 
-    padding: 15px;
-}
-
-.card-title { 
-    font-size: 1rem;
-    margin: 8px 0;
-}
-
-.card-desc { 
-    font-size: 0.85rem;
-    color: #666;
-    margin-bottom: 10px;
-}
- */
 /* ================= FOOTER ================= */
 .card-footer {
     margin-top: auto; /* Dorong ke bawah */
@@ -1254,30 +1236,12 @@ footer {
     color: #e74c3c;
 }
 
-.btn-buy { /* baru */
-    padding: 6px 12px;
-    background: #3498db;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
 
 .btn-buy:hover { /* baru */
     background: #2980b9;
 }
 
 /* ================= BADGE ================= */
-/* baru */
-/* .badge { 
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    color: white;
-    margin-bottom: 10px;
-} */
 .stock-tersedia,
 .stock-terbatas,
 .stock-habis {
@@ -1334,7 +1298,7 @@ footer {
 
 .price-label {
     display: block;
-    font-size: 0.75rem;
+    font-size: 0.70rem;
     color: #666;
     margin-bottom: 2px;
 }
@@ -1348,7 +1312,7 @@ footer {
 
 .old-price{
     display: block;
-    color:#999;
+    color:#666;
     font-size:12px;
     text-decoration:line-through;
     margin-bottom: 2px;
@@ -1356,9 +1320,9 @@ footer {
 
 .new-price{
     display: block;
-    color:#e53935;
+    color:#CC0000;
     font-size:20px;
-    font-weight:bold;
+    /* font-weight:bold; */
 }
 /* Tombol Beli */
 .btn-buy {
@@ -1392,6 +1356,44 @@ footer {
     text-align: center;
     font-weight: 500;
 }
+.kategori-section{
+    margin-bottom:50px;
+}
+
+.kategori-section h2{
+    margin-bottom:20px;
+    border-left:5px solid orange;
+    padding-left:10px;
+}
+
+.lihat-semua{
+    text-align:center;
+    margin-top:20px;
+}
+
+.lihat-semua button{
+    background:orange;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+#product-image-file {
+    cursor: pointer;
+}
+#product-category {
+    cursor: pointer;
+}
+.product-card{
+    transition: all 0.3s ease;
+}
+
+.product-card:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -1422,3 +1424,34 @@ footer {
 #qty-input { width: 50px; text-align: center; border: none; }
 .btn-buy-large { background: #e67e22; color: white; border: none; padding: 15px; width: 100%; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 15px; }
 .btn-buy-large:disabled { background: #ccc; cursor: not-allowed; }
+
+
+/* gambar jadi abu abu */
+.sold-out .card-image{
+    filter: grayscale(100%);
+    opacity: 0.6;
+}
+
+/* Title Produk juga sedikit pudar */
+/* .sold-out{
+    opacity: 0.8;
+} 
+
+/* label sold out */
+/* .sold-out::after{
+    content: "SOLD OUT";
+    position: absolute;
+    rotate: -30deg;
+    top: 85px;
+    left: 30px;
+    background: red;
+    color: white;
+    font-size: 27px;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-weight: bold;
+} */
+
+input[type="file"]::-webkit-file-upload-button{
+    display:none;
+}
