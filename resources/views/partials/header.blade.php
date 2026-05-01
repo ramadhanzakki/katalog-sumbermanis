@@ -7,7 +7,7 @@
     <div class="header-content">
         <div class="header-left">
             <a href="{{ route('user.index') }}" class="navbar-brand">
-                <img src="{{ asset('foto/logomitra.png') }}" alt="Logo Sumber Manis" style="height: 80px;">
+                <img src="{{ asset('img/logomitra.png') }}" alt="Logo Sumber Manis" style="height: 80px;">
             </a>
         </div>
         <div class="header-center">
