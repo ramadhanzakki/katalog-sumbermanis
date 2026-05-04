@@ -43,10 +43,7 @@ class AuthController extends Controller
             ->with('error', 'Email atau password salah.');
     }
 
-    /**
-     * Proses logout.
-     * Route: POST /logout
-     */
+    // Proses logout.
     public function logout(Request $request)
     {
         Auth::logout();
