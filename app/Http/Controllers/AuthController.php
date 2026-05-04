@@ -8,10 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    /**
-     * Tampilkan halaman form login.
-     * Route: GET /login
-     */
+    //Tampilkan halaman form login
     public function showLogin()
     {
         // Jika sudah login, langsung redirect ke dashboard admin
@@ -22,10 +19,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    /**
-     * Proses login dari form.
-     * Route: POST /login
-     */
+    //Proses login dari form.
     public function login(Request $request)
     {
         // Validasi input

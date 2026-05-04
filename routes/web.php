@@ -4,7 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-// Halaman Publik (bisa diakses siapa saja)
+// Public
 Route::get('/', [UserController::class, 'index'])->name('user.index');
 
 // Auth

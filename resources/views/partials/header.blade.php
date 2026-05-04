@@ -6,7 +6,7 @@
 <header class="header">
     <div class="header-content">
         <div class="header-left">
-            <a href="{{ route('user.index') }}" class="navbar-brand">
+            <a href="{{ route('auth.login') }}" class="navbar-brand">
                 <img src="{{ asset('img/logomitra.png') }}" alt="Logo Sumber Manis" style="height: 80px;">
             </a>
         </div>
