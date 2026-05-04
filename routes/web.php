@@ -9,3 +9,5 @@ Route::get('/', function () {
         'banners'    => collect(),
     ]);
 })->name('user.index');
+
+
