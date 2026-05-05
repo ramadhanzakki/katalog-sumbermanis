@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Product extends Model
@@ -25,6 +24,11 @@ class Product extends Model
         'price_retail'     => 'decimal:2',
         'price_wholesale'  => 'decimal:2',
         'is_active'        => 'boolean',
+    ];
+
+    protected $appends = [
+        'image_url',
+        'stock_label'
     ];
 
     // Auto-generate slug dari name
