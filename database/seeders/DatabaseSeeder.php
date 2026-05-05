@@ -13,9 +13,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // ============================================
         // 1. Akun Admin
-        // ============================================
         User::updateOrCreate(
             ['email' => 'admin@sumbermanis.com'],
             [
@@ -25,9 +23,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // ============================================
         // 2. Kategori Produk
-        // ============================================
         $categories = [
             'Minuman',
             'Makanan',
@@ -41,9 +37,7 @@ class DatabaseSeeder extends Seeder
             Category::firstOrCreate(['name' => $name]);
         }
 
-        // ============================================
         // 3. Contoh Produk
-        // ============================================
         $minuman   = Category::where('name', 'Minuman')->first();
         $bahanDapur = Category::where('name', 'Bahan Dapur')->first();
         $bumbu     = Category::where('name', 'Bumbu-Bumbu')->first();
@@ -98,18 +92,33 @@ class DatabaseSeeder extends Seeder
             );
         }
 
-        // ============================================
         // 4. Contoh Banner
-        // ============================================
-        // Catatan: isi image_path dengan nama file yang sudah
-        // kamu upload ke storage/app/public/banners/
-        Banner::firstOrCreate(
-            ['sort_order' => 1],
+        $banners = [
             [
-                'image_path' => 'banners/placeholder.jpg',
-                'link_url'   => null,
-                'is_active'  => true,
+                'sort_order' => 1,
+                'image_path' => 'img/pm_banner_260302_iYZ1.webp',
+                'link_url' => null,
+                'is_active' => true
+            ],
+            [
+                'sort_order' => 2,
+                'image_path' => 'img/pm_banner_260310_U6CO.webp',
+                'link_url' => null,
+                'is_active' => true
+            ],
+            [
+                'sort_order' => 2,
+                'image_path' => 'img/pm_banner_260311_Sb6P.webp',
+                'link_url' => null,
+                'is_active' => true
             ]
-        );
+        ];
+
+        foreach ($banners as $bannersData) {
+            Banner::firstOrCreate(
+                ['sort_order' => $bannersData['sort_order']],
+                $bannersData
+            );
+        }
     }
 }
