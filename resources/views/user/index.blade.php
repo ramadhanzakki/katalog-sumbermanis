@@ -159,11 +159,25 @@
 
         {{-- Banner Carousel --}}
         <div class="carousel-container">
-            <div id="banner-track" style="display:flex; transition:transform 0.7s ease-in-out;"></div>
+            <div id="banner-track" style="display:flex; transition:transform 0.7s ease-in-out;">
+                @foreach ($banners->chunk(2) as $slideIndex =>$bannerPair)
+                    <div class="banner-slide">
+                        @foreach ($bannerPair as $banner)
+                            <a href="{{ $banner->link_url ?? '#' }}" target="{{ $banner->link_url ? '_blank' : '_self' }}" rel="noopener noreferrer">
+                                <img src="{{ $banner->image_url }}" alt="Banner Promo">
+                            </a>
+                        @endforeach
+                    </div>
+                @endforeach
+            </div>
             <button id="banner-prev">&#10094;</button>
             <button id="banner-next">&#10095;</button>
         </div>
-        <div id="carousel-dots"></div>
+        <div id="carousel-dots">
+            @for ($i = 0; $i < $banners->chunk(2)->count(); $i++)
+                <span class="dot {{ $i === 0 ? 'active' : '' }}" onclick="goToSlide({{ $i }})"></span>
+            @endfor
+        </div>
 
         {{-- Header Katalog --}}
         <div class="catalog-header" id="katalogProduk">
