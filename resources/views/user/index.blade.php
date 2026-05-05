@@ -191,9 +191,28 @@
         </div>
 
         {{-- Grid Produk --}}
-        {{-- Produk di-render oleh catalog.js via fetch ke API --}}
         <div class="product-grid" id="product-container">
-            {{-- Diisi oleh JavaScript --}}
+            @forelse ($products as $product)
+                <div class="card {{ $product->stock <= 0 ? 'sold out' : '' }}" data-category="{{ $product->category_name }}">
+                    <img src="{{ $product->image_url }}" class="card-image" alt="{{ $product->name }}">
+                    <div class="card-content">
+                        @if ($product->stock <= 0)
+                            <span class="stock-badge stock-habis">Habis</span>
+                        @elseif ($product->stock <= 5)
+                            <span class="stock-badge stock-terbatas">Terbatas</span>
+                        @else
+                            <span class="stock-badge stock-tersedia">Tersedia</span>
+                        @endif
+                        <h3 class="card-title">{{ $product->name }}</h3>
+                        <p class="card-desc">{{ $product->description }}</p>
+                        <div class="card-footer">
+                            <span>{{ 'Rp ' . number_format($product->price_retail, 0, ',', '.') }}</span>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <p style="text-align: center; grid-column: 1/-1; color:#999 ">Belum ada product.</p>
+            @endforelse
         </div>
 
     </main>
@@ -231,6 +250,16 @@
     const CATEGORIES_DATA = @json($categories);
     const WA_NUMBER       = '{{ config("app.wa_number", "6281234567890") }}';
     const ASSET_URL       = '{{ asset("storage") }}';
+
+    // Event Listener untuk modal
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function () {
+                const productId = this.dataset.productId;
+                if (productId) openModal(productId);
+            })
+        })
+    })
 </script>
 
 <script src="{{ asset('js/banner.js') }}"></script>

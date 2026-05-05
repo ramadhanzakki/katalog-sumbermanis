@@ -27,6 +27,11 @@ class Product extends Model
         'is_active'        => 'boolean',
     ];
 
+    protected $appends = [
+        'image_url',
+        'stock_label'
+    ];
+
     // Auto-generate slug dari name
     protected static function boot(): void
     {

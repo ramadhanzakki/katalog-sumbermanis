@@ -16,7 +16,6 @@ class UserController extends Controller
         $categories = Category::orderBy('name')->get();
 
         // Ambil produk yang aktif, sekalian eager load kategorinya
-        // agar tidak terjadi N+1 query
         $products = Product::with('category')
             ->where('is_active', true)
             ->orderBy('name')
@@ -39,6 +38,10 @@ class UserController extends Controller
                 return $banner;
             });
 
-        return view('user.index', compact('products', 'categories', 'banners'));
+        return view('user.index', [
+            'products' => $products, 
+            'categories' => $categories, 
+            'banners' => $banners
+        ]);
     }
 }
