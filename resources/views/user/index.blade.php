@@ -207,7 +207,7 @@
         {{-- Grid Produk --}}
         <div class="product-grid" id="product-container">
             @forelse ($products as $product)
-                <div class="card {{ $product->stock <= 0 ? 'sold out' : '' }}" data-category="{{ $product->category_name }}">
+                <div class="card {{ $product->stock <= 0 ? 'sold-out' : '' }}" data-category="{{ $product->category->name ?? '' }}">
                     <img src="{{ $product->image_url }}" class="card-image" alt="{{ $product->name }}">
                     <div class="card-content">
                         @if ($product->stock <= 0)
