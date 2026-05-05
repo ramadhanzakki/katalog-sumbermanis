@@ -92,32 +92,35 @@ class DatabaseSeeder extends Seeder
             );
         }
 
+        // ============================================
         // 4. Contoh Banner
+        // ============================================
+        // Catatan: isi image_path dengan lokasi file di public/
         $banners = [
             [
                 'sort_order' => 1,
                 'image_path' => 'img/pm_banner_260302_iYZ1.webp',
-                'link_url' => null,
-                'is_active' => true
+                'link_url'   => null,
+                'is_active'  => true,
             ],
             [
                 'sort_order' => 2,
                 'image_path' => 'img/pm_banner_260310_U6CO.webp',
-                'link_url' => null,
-                'is_active' => true
+                'link_url'   => 'https://wa.me/6281234567890',
+                'is_active'  => true,
             ],
             [
-                'sort_order' => 2,
+                'sort_order' => 3,
                 'image_path' => 'img/pm_banner_260311_Sb6P.webp',
-                'link_url' => null,
-                'is_active' => true
-            ]
+                'link_url'   => null,
+                'is_active'  => true,
+            ],
         ];
 
-        foreach ($banners as $bannersData) {
+        foreach ($banners as $bannerData) {
             Banner::firstOrCreate(
-                ['sort_order' => $bannersData['sort_order']],
-                $bannersData
+                ['sort_order' => $bannerData['sort_order']],
+                $bannerData
             );
         }
     }

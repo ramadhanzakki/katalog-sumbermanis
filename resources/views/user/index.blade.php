@@ -117,7 +117,8 @@
     }
     .banner-slide {
         display: flex; gap: 20px;
-        min-width: 1040px; height: 250px;
+        width: 100%; /* Setiap slide full width */
+        flex-shrink: 0; /* Jangan shrink */
     }
     @media (max-width: 1100px) {
         .banner-slide img { width: 48% !important; max-width: 500px; }
@@ -159,14 +160,18 @@
 
         {{-- Banner Carousel --}}
         <div class="carousel-container">
-            <div id="banner-track" style="display:flex; transition:transform 0.7s ease-in-out;">
+            <div id="banner-track" style="display:flex; transition:transform 0.7s ease-in-out; width: calc({{ $banners->chunk(2)->count() }} * 100%);">
                 @foreach ($banners->chunk(2) as $slideIndex =>$bannerPair)
-                    <div class="banner-slide">
+                    <div class="banner-slide" style="width: 100%; flex-shrink: 0;">
                         @foreach ($bannerPair as $banner)
                             <a href="{{ $banner->link_url ?? '#' }}" target="{{ $banner->link_url ? '_blank' : '_self' }}" rel="noopener noreferrer">
                                 <img src="{{ $banner->image_url }}" alt="Banner Promo">
                             </a>
                         @endforeach
+                        @if($loop->remaining == 1 && $bannerPair->count() == 1)
+                            {{-- Placeholder untuk banner ganjil --}}
+                            <div style="flex:1;"></div>
+                        @endif
                     </div>
                 @endforeach
             </div>

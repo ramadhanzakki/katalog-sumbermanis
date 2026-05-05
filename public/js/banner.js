@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (btnPrev) btnPrev.onclick = prevBanner;
     if (btnNext) btnNext.onclick = nextBanner;
 
-    // Auto-slide setiap 4 detik
-    setInterval(nextBanner, 4000);
+    // Matikan auto-slide, geser manual saja
+    // setInterval(nextBanner, 4000);
 });
 
 function updateCarousel() {
@@ -19,8 +19,10 @@ function updateCarousel() {
 
     if (!track || slides.length === 0) return;
 
+    // Geser berdasarkan persentase (100% per slide)
     track.style.transform = `translateX(-${currentSlide * 100}%)`;
 
+    // Update dot indicators
     dots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
 }
 
