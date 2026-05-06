@@ -104,7 +104,8 @@
 }
 .banner-slide {
     display: flex; gap: 20px;
-    min-width: 1040px; height: 250px;
+    width: 100%; /* Setiap slide full width */
+    flex-shrink: 0; /* Jangan shrink */
 }
 @media (max-width: 1100px) {
     .banner-slide img { width: 48% !important; max-width: 500px; }
