@@ -14,7 +14,6 @@ class DashboardController extends Controller
     {
         $products = Product::with('category')->latest()->paginate(10);
         $categories = Category::all();
-        
         $totalProducts = Product::count();
         $totalStock = Product::sum('stock');
         $lowStock = Product::where('stock', '<=', 5)->where('stock', '>', 0)->count();
