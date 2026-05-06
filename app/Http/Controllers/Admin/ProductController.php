@@ -71,7 +71,6 @@ class DashboardController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Handle file upload dengan pengecekan yang lebih ketat
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             if ($file && $file->isValid()) {
@@ -82,7 +81,6 @@ class DashboardController extends Controller
                 // Simpan file baru
                 $validated['image_path'] = $file->store('products', 'public');
             }
-            // Jika file tidak valid, tidak update image_path (tetap gunakan yang lama)
         }
 
         $product->update($validated);
