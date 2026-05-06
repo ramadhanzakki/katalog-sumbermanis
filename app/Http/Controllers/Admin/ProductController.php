@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
 
-class ProductController extends Controller
+class DashboardController extends Controller
 {
     public function index()
     {
@@ -20,9 +20,14 @@ class ProductController extends Controller
         $lowStock = Product::where('stock', '<=', 5)->where('stock', '>', 0)->count();
         $outOfStock = Product::where('stock', '<=', 0)->count();
 
-        return view('admin.product.index', compact(
-            'products', 'categories', 'totalProducts', 'totalStock', 'lowStock', 'outOfStock'
-        ));
+        return view('admin.dashboard', [
+            'totalProducts' => $totalProducts,
+            'totalStock' => $totalStock,
+            'lowStock' => $lowStock,
+            'outOfStock' => $outOfStock,
+            'categories' => $categories,
+            'products' => $products
+        ]);
     }
 
     public function store(Request $request)
@@ -39,7 +44,14 @@ class ProductController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $validated['image_path'] = $request->file('image')->store('products', 'public');
+            $file = $request->file('image');
+            if ($file && $file->isValid()) {
+                $validated['image_path'] = $file->store('products', 'public');
+            } else {
+                $validated['image_path'] = null;
+            }
+        } else {
+            $validated['image_path'] = null;
         }
 
         Product::create($validated);
@@ -60,11 +72,18 @@ class ProductController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        // Handle file upload dengan pengecekan yang lebih ketat
         if ($request->hasFile('image')) {
-            if ($product->image_path) {
-                Storage::disk('public')->delete($product->image_path);
+            $file = $request->file('image');
+            if ($file && $file->isValid()) {
+                // Hapus file lama jika ada
+                if ($product->image_path) {
+                    Storage::disk('public')->delete($product->image_path);
+                }
+                // Simpan file baru
+                $validated['image_path'] = $file->store('products', 'public');
             }
-            $validated['image_path'] = $request->file('image')->store('products', 'public');
+            // Jika file tidak valid, tidak update image_path (tetap gunakan yang lama)
         }
 
         $product->update($validated);
