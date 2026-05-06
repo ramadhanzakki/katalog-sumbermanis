@@ -1,0 +1,20 @@
+.auth-container {
+    display: flex; justify-content: center; align-items: center;
+    min-height: calc(100vh - 140px); padding: 2rem;
+}
+.auth-box {
+    background: #fff; border-radius: 16px;
+    padding: 2.5rem; width: 100%; max-width: 420px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+.form-groupp { margin-bottom: 1.2rem; position: relative; }
+.form-groupp label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.9rem; }
+.form-groupp input {
+    width: 100%; padding: 12px 16px; border: 1.5px solid #e0e0e0;
+    border-radius: 8px; font-size: 1rem; transition: border 0.2s;
+    outline: none;
+}
+.form-groupp input:focus { border-color: var(--primary, #5aa8b7); }
+.auth-link { margin-top: 1.2rem; text-align: center; font-size: 0.9rem; }
+.auth-link a { color: var(--primary, #5aa8b7); text-decoration: none; }
+.auth-link a:hover { text-decoration: underline; }

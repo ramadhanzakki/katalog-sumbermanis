@@ -14,9 +14,6 @@
     {{-- CSS tambahan per-halaman (opsional) --}}
     @stack('styles')
 
-    <style>
-        html, body { overscroll-behavior: none; }
-    </style>
 </head>
 <body>
 
