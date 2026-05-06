@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $products = Product::with('category')->latest()->paginate(10);
         $categories = Category::all();
@@ -19,13 +19,20 @@ class DashboardController extends Controller
         $lowStock = Product::where('stock', '<=', 5)->where('stock', '>', 0)->count();
         $outOfStock = Product::where('stock', '<=', 0)->count();
 
+        // Cek apakah ada parameter ?edit=id untuk mode edit
+        $selectedProduct = null;
+        if ($request->query('edit')) {
+            $selectedProduct = Product::find($request->query('edit'));
+        }
+
         return view('admin.dashboard', [
-            'totalProducts' => $totalProducts,
-            'totalStock' => $totalStock,
-            'lowStock' => $lowStock,
-            'outOfStock' => $outOfStock,
-            'categories' => $categories,
-            'products' => $products
+            'totalProducts'   => $totalProducts,
+            'totalStock'      => $totalStock,
+            'lowStock'        => $lowStock,
+            'outOfStock'      => $outOfStock,
+            'categories'      => $categories,
+            'products'        => $products,
+            'selectedProduct' => $selectedProduct,
         ]);
     }
 
@@ -55,11 +62,7 @@ class DashboardController extends Controller
 
         Product::create($validated);
 
-        if ($request->ajax()) {
-            return response()->json(['success' => true, 'message' => 'Produk berhasil ditambahkan!']);
-        }
-
-        return redirect()->route('admin.products.index')->with('success', 'Produk berhasil ditambahkan!');
+        return redirect()->route('admin.dashboard')->with('success', 'Produk berhasil ditambahkan!');
     }
 
     public function update(Request $request, Product $product)
@@ -89,11 +92,7 @@ class DashboardController extends Controller
 
         $product->update($validated);
 
-        if ($request->ajax()) {
-            return response()->json(['success' => true, 'message' => 'Produk berhasil diperbarui!']);
-        }
-
-        return redirect()->route('admin.products.index')->with('success', 'Produk berhasil diperbarui!');
+        return redirect()->route('admin.dashboard')->with('success', 'Produk berhasil diperbarui!');
     }
 
     public function destroy(Product $product)
@@ -103,6 +102,6 @@ class DashboardController extends Controller
         }
         $product->delete();
 
-        return redirect()->route('admin.products.index')->with('success', 'Produk berhasil dihapus!');
+        return redirect()->route('admin.dashboard')->with('success', 'Produk berhasil dihapus!');
     }
 }
