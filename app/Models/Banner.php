@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Banner extends Model
 {
@@ -17,12 +18,12 @@ class Banner extends Model
         'is_active' => 'boolean',
     ];
 
-    // ============================================
-    // Accessor: URL lengkap gambar banner
-    // Dipakai di controller: $banner->image_url
-    // ============================================
     public function getImageUrlAttribute(): string
     {
+        if ($this->image_path && Str::startsWith($this->image_path, ['http://', 'https://', '/', 'img/', 'storage/'])) {
+            return asset($this->image_path);
+        }
+
         return asset('storage/' . $this->image_path);
     }
 }

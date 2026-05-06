@@ -9,7 +9,6 @@ use Illuminate\Routing\Controller;
 
 class UserController extends Controller
 {
-    
     public function index()
     {
         $categories = Category::orderBy('name')->get();
@@ -33,6 +32,10 @@ class UserController extends Controller
                 return $banner;
             });
 
-        return view('user.index', compact('products', 'categories', 'banners'));
+        return view('user.index', [
+            'products' => $products, 
+            'categories' => $categories, 
+            'banners' => $banners
+        ]);
     }
 }
