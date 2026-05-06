@@ -12,19 +12,14 @@ class UserController extends Controller
     
     public function index()
     {
-        // Ambil semua kategori untuk tombol filter
         $categories = Category::orderBy('name')->get();
 
-        // Ambil produk yang aktif, sekalian eager load kategorinya
-        // agar tidak terjadi N+1 query
         $products = Product::with('category')
             ->where('is_active', true)
             ->orderBy('name')
             ->get()
             ->map(function ($product) {
-                // Tambahkan field image_url dan category_name
-                // agar bisa langsung dibaca oleh catalog.js
-                $product->image_url    = $product->image_url;      // via accessor
+                $product->image_url    = $product->image_url; 
                 $product->category_name = $product->category->name ?? '';
                 return $product;
             });
@@ -34,8 +29,7 @@ class UserController extends Controller
             ->orderBy('sort_order')
             ->get()
             ->map(function ($banner) {
-                // Tambahkan field image_url agar bisa dibaca oleh banner.js
-                $banner->image_url = $banner->image_url; // via accessor
+                $banner->image_url = $banner->image_url;
                 return $banner;
             });
 
