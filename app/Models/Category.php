@@ -9,9 +9,7 @@ class Category extends Model
 {
     protected $fillable = ['name', 'slug'];
 
-    // ============================================
-    // Auto-generate slug dari name sebelum disimpan
-    // ============================================
+    // Auto-generate slug dari name
     protected static function boot(): void
     {
         parent::boot();
@@ -25,9 +23,7 @@ class Category extends Model
         });
     }
 
-    // ============================================
     // Relasi: satu kategori punya banyak produk
-    // ============================================
     public function products()
     {
         return $this->hasMany(Product::class);

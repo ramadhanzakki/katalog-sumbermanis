@@ -11,19 +11,26 @@ class UserController extends Controller
 {
     public function index()
     {
-        // Ambil semua kategori untuk tombol filter
         $categories = Category::orderBy('name')->get();
 
-        // Ambil produk yang aktif, sekalian eager load kategorinya
         $products = Product::with('category')
             ->where('is_active', true)
             ->orderBy('name')
-            ->get();
+            ->get()
+            ->map(function ($product) {
+                $product->image_url    = $product->image_url; 
+                $product->category_name = $product->category->name ?? '';
+                return $product;
+            });
 
         // Ambil banner yang aktif, urut sesuai sort_order
         $banners = Banner::where('is_active', true)
             ->orderBy('sort_order')
-            ->get();
+            ->get()
+            ->map(function ($banner) {
+                $banner->image_url = $banner->image_url;
+                return $banner;
+            });
 
         return view('user.index', [
             'products' => $products, 
