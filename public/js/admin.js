@@ -1,21 +1,38 @@
-function previewImage(input) {
-    const preview = document.getElementById('image-preview');
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            preview.src = e.target.result;
-            preview.style.display = 'block';
+function handleFormSubmit(event) {
+    event.preventDefault();
+    
+    const form = document.getElementById('product-form');
+    const formData = new FormData(form);
+    
+    const url = form.action;
+    const method = form.method;
+    
+    fetch(url, {
+        method: method,
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') || document.querySelector('input[name="_token"]').value
         }
-        reader.readAsDataURL(input.files[0]);
-    } else {
-        preview.src = '';
-        preview.style.display = 'none';
-    }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload(); // Reload page to show updated data
+        } else {
+            alert('Error: ' + (data.message || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while saving the product.');
+    });
 }
 
 function editProduct(product) {
     document.getElementById('form-title').innerHTML = '<i class="bi bi-pencil-square"></i> Edit Produk';
-    document.getElementById('product-form').action = '/admin/products/' + product.id;
+    const updateUrl = document.getElementById('product-form').dataset.updateUrl.replace(':id', product.id);
+    document.getElementById('product-form').action = updateUrl;
     document.getElementById('form-method').value = 'PUT';
     
     document.getElementById('product-name').value = product.name;
@@ -41,8 +58,8 @@ function editProduct(product) {
 
 function cancelEdit() {
     document.getElementById('form-title').innerHTML = '<i class="bi bi-plus-square-fill"></i> Tambah Produk Baru';
-    // Note: This URL might need to be dynamic if the route changes, but for now hardcoded based on view
-    document.getElementById('product-form').action = '/admin/products'; 
+    const storeUrl = document.getElementById('product-form').dataset.storeUrl;
+    document.getElementById('product-form').action = storeUrl;
     document.getElementById('form-method').value = 'POST';
     document.getElementById('product-form').reset();
     

@@ -55,6 +55,10 @@ class DashboardController extends Controller
 
         Product::create($validated);
 
+        if ($request->ajax()) {
+            return response()->json(['success' => true, 'message' => 'Produk berhasil ditambahkan!']);
+        }
+
         return redirect()->route('admin.products.index')->with('success', 'Produk berhasil ditambahkan!');
     }
 
@@ -84,6 +88,10 @@ class DashboardController extends Controller
         }
 
         $product->update($validated);
+
+        if ($request->ajax()) {
+            return response()->json(['success' => true, 'message' => 'Produk berhasil diperbarui!']);
+        }
 
         return redirect()->route('admin.products.index')->with('success', 'Produk berhasil diperbarui!');
     }

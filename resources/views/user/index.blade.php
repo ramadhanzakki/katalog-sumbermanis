@@ -52,7 +52,6 @@
         </div>
 
         {{-- Filter Kategori --}}
-        {{-- Kategori diambil dari database, dikirim controller via $categories --}}
         <div style="margin-bottom: 2rem; display: flex; gap: 10px; flex-wrap: wrap;">
             <button class="btn btn-outline active" onclick="filterCategory('all')">
                 <i class="bi bi-grid"></i> Semua
@@ -91,9 +90,7 @@
 
     </main>
 
-    {{-- ============================== --}}
     {{-- SECTION: Tentang Kami          --}}
-    {{-- ============================== --}}
     <section id="tentang" style="padding: 2rem; background: white; margin-top: 2rem;">
         <div style="max-width: 800px; margin: 0 auto; text-align: center;">
             <h2>Tentang Kami</h2>
@@ -113,14 +110,10 @@
 
 @endsection
 
-{{-- ============================== --}}
 {{-- JS khusus halaman ini          --}}
-{{-- ============================== --}}
 @push('scripts')
 
-{{-- Data produk & kategori dari Laravel dikirim ke JS --}}
 <script>
-    // Data untuk modal (tetap butuh JS karena modal perlu akses data)
     const PRODUCTS_DATA   = @json($products);
     const CATEGORIES_DATA = @json($categories);
     const WA_NUMBER       = '{{ config("app.wa_number", "6281234567890") }}';
