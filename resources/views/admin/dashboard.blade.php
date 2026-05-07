@@ -204,8 +204,6 @@
                                 type="file"
                                 name="image"
                                 class="form-control"
-                                accept="image/*"
-                                onchange="previewImage(this)"
                             >
                             <img id="image-preview" src="" style="max-width: 200px; margin-top: 10px; display: none; border-radius: 8px;">
                             @error('image')
@@ -249,7 +247,7 @@
                         @forelse($products as $index => $product)
                             <tr>
                                 <td>{{ $products->firstItem() + $index }}</td>
-                                <td><img src="{{ $product->image_url }}" alt="Produk" class="product-img"></td>
+                                <td><img src="{{ $product->getImageUrlAttribute() }}" alt="{{ $product->image_path }}" class="product-img"></td>
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->category->name ?? '-' }}</td>
                                 <td>Rp {{ number_format($product->price_retail, 0, ',', '.') }}</td>

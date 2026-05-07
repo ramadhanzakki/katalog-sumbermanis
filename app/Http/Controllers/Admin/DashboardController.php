@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class DashboardController extends Controller
 {
@@ -46,22 +47,24 @@ class DashboardController extends Controller
             'wholesale_min_qty' => 'nullable|integer|min:1',
             'stock' => 'required|integer|min:0',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            if ($file && $file->isValid()) {
-                $validated['image_path'] = $file->store('products', 'public');
-            } else {
-                $validated['image_path'] = null;
-            }
-        } else {
-            $validated['image_path'] = null;
+            $photo = $request->file('image');
+            $photoName = Str::uuid() . '.' . $photo->getClientOriginalExtension();
+            
+            // Simpan file ke disk 'public' dalam folder 'products'
+            Storage::disk('public')->putFileAs('products', $photo, $photoName);
+            
+            // Simpan path relatif ke database (termasuk folder 'products/')
+            $validated['image_path'] = 'products/' . $photoName;
         }
 
-        Product::create($validated);
+        // Hapus 'image' dari array agar tidak bentrok saat create (karena kolom di DB adalah image_path)
+        unset($validated['image']);
 
+        Product::create($validated);
         return redirect()->route('admin.dashboard')->with('success', 'Produk berhasil ditambahkan!');
     }
 
@@ -86,9 +89,12 @@ class DashboardController extends Controller
                     Storage::disk('public')->delete($product->image_path);
                 }
                 // Simpan file baru
-                $validated['image_path'] = $file->store('products', 'public');
+                $validated['image_path'] = \Illuminate\Support\Facades\Storage::disk('public')->putFile('products', $file);
             }
         }
+
+        // Hapus 'image' dari array agar tidak bentrok saat update
+        unset($validated['image']);
 
         $product->update($validated);
 
