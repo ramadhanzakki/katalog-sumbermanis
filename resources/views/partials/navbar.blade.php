@@ -25,7 +25,7 @@
     <ul class="nav-menu" id="nav-menu">
         <li>
             <a href="{{ route('user.index') }}"
-               class="nav-link {{ request()->routeIs('user.index') ? 'active' : '' }}">
+                class="nav-link {{ request()->routeIs('user.index') ? 'active' : '' }}">
                 <i class="bi bi-house-fill"></i> Beranda
             </a>
         </li>
