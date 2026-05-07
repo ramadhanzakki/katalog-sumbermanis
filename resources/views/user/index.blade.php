@@ -66,9 +66,17 @@
         {{-- Grid Produk --}}
         <div class="product-grid" id="product-container">
             @forelse ($products as $product)
-                <div class="card {{ $product->stock <= 0 ? 'sold-out' : '' }}" data-category="{{ $product->category_name }}" data-product-id="{{ $product->id }}" data-bs-target="productModal{{ $product->id }}">
-                    <img src="{{ $product->getImageUrlAttribute() }}" class="card-image" alt="{{ $product->name }}">
+                <div class="card {{ $product->stock <= 0 ? 'sold-out' : '' }}" 
+                    data-category="{{ $product->category_name }}" 
+                    data-product-id="{{ $product->id }}"
+                    onclick="openModal('productModal{{ $product->id }}')">
+
+                    <img src="{{ $product->getImageUrlAttribute() }}" 
+                        class="card-image" 
+                        alt="{{ $product->name }}">
+
                     <div class="card-content">
+
                         @if ($product->stock <= 0)
                             <span class="stock-badge stock-habis">Habis</span>
                         @elseif ($product->stock <= 5)
@@ -76,15 +84,25 @@
                         @else
                             <span class="stock-badge stock-tersedia">Tersedia</span>
                         @endif
+
                         <h3 class="card-title">{{ $product->name }}</h3>
-                        <p class="card-desc">{{ $product->description ?? '' }}</p>
+
+                        <p class="card-desc">
+                            {{ $product->description ?? '' }}
+                        </p>
+
                         <div class="card-footer">
-                            <span class="new-price">{{ 'Rp ' . number_format($product->price_retail, 0, ',', '.') }}</span>
+                            <span class="new-price">
+                                {{ 'Rp ' . number_format($product->price_retail, 0, ',', '.') }}
+                            </span>
                         </div>
+
                     </div>
                 </div>
             @empty
-                <p style="text-align:center; grid-column:1/-1; color:#999;">Belum ada produk.</p>
+                <p style="text-align:center; grid-column:1/-1; color:#999;">
+                    Belum ada produk.
+                </p>
             @endforelse
         </div>
 
@@ -105,30 +123,67 @@
 
     @include('partials.footer')
 
-    {{-- Modal detail produk --}}
-    @include('partials.product-modal')
+    {{-- MODAL --}}
+    @foreach ($products as $product)
+        <div id="productModal{{ $product->id }}" 
+            class="modal-overlay" 
+            onclick="closeModal(event)">
+
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <span class="modal-close" onclick="closeModal()">&times;</span>
+
+                <div class="modal-body">
+
+                    {{-- Gambar Produk --}}
+                    <div class="modal-left">
+                        <img id="modal-img" src="{{ $product->getImageUrlAttribute() }}" alt="Foto Produk">
+                    </div>
+
+                    {{-- Detail Produk --}}
+                    <div class="modal-right">
+                        <h2 id="modal-title" class="modal-title">{{ $product->name }}</h2>
+                        <p id="modal-desc" class="modal-desc">{{ $product->description }}</p>
+
+                        {{-- Kotak Harga --}}
+                        <div class="price-box">
+                            {{-- Harga Satuan --}}
+                            <div class="price-row">
+                                <span class="price-label">Harga Satuan:</span>
+                                <span id="modal-price-retail" class="price-val">Rp {{ $product->price_retail }}</span>
+                            </div>
+
+                            {{-- Harga Grosir (tersembunyi jika tidak ada) --}}
+                            <div id="modal-grosir-box" style="price-row">
+                                <div class="price-row">
+                                    <span class="price-label">
+                                        Harga Grosir (<span id="modal-min-grosir">{{ $product->wholesale_min_qty }}</span> pcs):
+                                    </span>
+                                    <span id="modal-price-grosir" class="price-val price-grosir">Rp {{ $product->price_wholesale }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Tombol Hubungi via WhatsApp --}}
+                        <a id="modal-wa-btn"
+                        href="https://wa.link/xqaqlb"
+                        target="_blank"
+                        class="btn-buy-large"
+                        style="display: block; text-align: center; text-decoration: none; margin-top: 10px;">
+                            <i class="bi bi-whatsapp"></i> Hubungi via WhatsApp
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    @endforeach
 
 @endsection
 
 {{-- JS khusus halaman ini          --}}
 @push('scripts')
 
-<script>
-    const PRODUCTS_DATA   = @json($products);
-    const CATEGORIES_DATA = @json($categories);
-    const WA_NUMBER       = '{{ config("app.wa_number", "6281234567890") }}';
-    const ASSET_URL       = '{{ asset("storage") }}';
-    
-    // Event listener untuk modal saat card diklik
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('click', function() {
-                const productId = this.dataset.productId;
-                if (productId) openModal(productId);
-            });
-        });
-    });
-</script>
+
 
 <script src="{{ asset('js/banner.js') }}"></script>
 <script src="{{ asset('js/catalog.js') }}"></script>
