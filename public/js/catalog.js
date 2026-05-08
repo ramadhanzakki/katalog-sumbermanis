@@ -27,7 +27,7 @@ function filterProducts() {
 function filterCategory(category) {
     currentCategory = category;
     
-    document.querySelectorAll('.btn.btn-outline').forEach(btn => {
+    document.querySelectorAll('.btn .btn-outline').forEach(btn => {
         btn.classList.remove('active');
     });
     event.currentTarget.classList.add('active');
