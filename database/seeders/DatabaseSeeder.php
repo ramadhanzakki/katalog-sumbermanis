@@ -100,19 +100,16 @@ class DatabaseSeeder extends Seeder
             [
                 'sort_order' => 1,
                 'image_path' => 'img/pm_banner_260302_iYZ1.webp',
-                'link_url'   => null,
                 'is_active'  => true,
             ],
             [
                 'sort_order' => 2,
                 'image_path' => 'img/pm_banner_260310_U6CO.webp',
-                'link_url'   => 'https://wa.me/6281234567890',
                 'is_active'  => true,
             ],
             [
                 'sort_order' => 3,
                 'image_path' => 'img/pm_banner_260311_Sb6P.webp',
-                'link_url'   => null,
                 'is_active'  => true,
             ],
         ];
