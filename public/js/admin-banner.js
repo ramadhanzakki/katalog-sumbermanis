@@ -2,10 +2,6 @@ let maxBanners = 6;
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Banner admin loaded');
-    loadBanners();
-    
-    // Form upload
-    document.getElementById('banner-form').onsubmit = addBanner;
     
     // Preview gambar
     document.getElementById('banner-image').onchange = previewImage;

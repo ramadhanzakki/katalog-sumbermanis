@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 </head>
 <body>
-
     <!-- LAYOUT ADMIN -->
     <div class="admin-layout">
         <!-- SIDEBAR -->
@@ -40,6 +39,22 @@
                 <a href="{{ route('user.index') }}" class="btn-lihat" target="_blank"><i class="bi bi-shop"></i> Lihat Website</a>
             </div>
 
+            @if ($errors->any())
+                <div class="alert alert-danger" style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #f5c6cb;">
+                    <ul style="margin: 0;">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            @if (session('success'))
+                <div class="alert alert-success" style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
+                    {{ session('success') }}
+                </div>
+            @endif
+
             <!-- STATS -->
             <div class="stats-grid">
                 <div class="stat-card">
@@ -60,10 +75,15 @@
             <div class="form-container">
                 <h3><i class="bi bi-plus-circle"></i> Tambah Banner Baru</h3>
                 <p>NOTE: sebelum memasukan banner, pastikan ukuran banner adalah 500 x 250 px <i class="bi bi-emoji-smile"></i></p>
-                <form id="banner-form" method="post">
+
+                <form action="{{ route('admin.banner.store') }}" method="post" enctype="multipart/form-data">
+                    @csrf
                     <div class="form-group">
                         <label><i class="bi bi-images"></i> Upload Gambar Banner</label>
-                        <input type="file" name="image" id="banner-image" style="cursor: pointer;" class="form-control" accept="image/*">
+                        <input type="file" name="image" id="banner-image" style="cursor: pointer;" class="form-control @error('image') is-invalid @enderror" accept="image/*">
+                        @error('image')
+                            <div style="color: red; font-size: 0.8rem; margin-top: 5px;">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <img id="banner-preview" style="max-width:300px; max-height:150px; border-radius:8px; margin-top:10px; display:none; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
@@ -87,7 +107,7 @@
                             </tr>
                         </thead>
                         <tbody id="banner-list">
-                            @foreach ($banners as $banner)
+                            @forelse ($banners as $banner)
                                 <tr>
                                     <td><img src="{{ $banner->getImageUrlAttribute() }}" alt="{{ $banner->image_path }}" class="product-img"></td>
                                     <td>{{ $banner->updated_at }}</td>
@@ -105,7 +125,11 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="text-center">Belum ada banner.</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
