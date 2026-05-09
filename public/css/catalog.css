@@ -60,8 +60,27 @@
     to   { transform: translateY(0); opacity: 1; }
 }
 @media (max-width: 768px) {
-    .modal-content { flex-direction: column; margin: 10% auto; }
-    .modal-left img { max-height: 300px; }
+    .modal-content { 
+        margin: 5% auto; 
+        width: 95%; 
+    }
+    .modal-body {
+        flex-direction: column;
+    }
+    .modal-left, .modal-right {
+        min-width: 100%;
+        padding: 15px;
+    }
+    .modal-left img { 
+        max-height: 250px; 
+    }
+    .modal-title {
+        font-size: 1.5rem;
+    }
+    .btn-buy-large {
+        padding: 12px;
+        font-size: 1rem;
+    }
 }
 
 /* Search bar */
@@ -87,29 +106,46 @@
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 .search-icon-btn:hover { color: #000000; }
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .search-wrapper { max-width: 100%; }
     .search-icon-btn { width: 40px; height: 40px; }
 }
 
 /* Banner carousel */
-.banner-slide img {
-    width: 500px !important; height: 250px !important;
-    object-fit: cover; border-radius: 20px; flex-shrink: 0;
-}
 .carousel-container {
     position: relative; width: 100%;
     max-width: 1040px; margin: 50px auto;
     overflow: hidden; border-radius: 20px;
 }
-.banner-slide {
-    display: flex; gap: 20px;
-    width: 100%; /* Setiap slide full width */
-    flex-shrink: 0; /* Jangan shrink */
+#banner-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    margin: 0 -10px;
 }
-@media (max-width: 1100px) {
-    .banner-slide img { width: 48% !important; max-width: 500px; }
-    .banner-slide { min-width: 100%; }
+.banner-slide {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+.banner-slide a {
+    display: block;
+    width: 100%;
+}
+.banner-slide img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .banner-slide {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
 }
 .carousel-container:hover #banner-prev,
 .carousel-container:hover #banner-next { opacity: 1; }

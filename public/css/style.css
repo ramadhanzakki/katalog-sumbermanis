@@ -975,10 +975,6 @@ ul {
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
-
-    min-width:200px;
-    max-width:200px;
-
 }
 
 .card:hover {
@@ -1158,21 +1154,16 @@ footer {
 @media (max-width: 600px) {
 
 }
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .header-content { flex-direction: column; gap: 10px; }
     .header-center { order: -1; }
     .header-right { display: none; }
     
     .navbar { padding: 0 1rem; }
     
-    .navbar-brand-mobile {
-        display: block;
-        font-size: 1.3rem;
-        font-weight: bold;
-        color: white;
-        text-decoration: none;
+    .navbar .navbar-brand {
+        display: none;
     }
-    .navbar-brand-mobile span { color: var(--primary); }
     
     /* Tampilkan hamburger */
     .hamburger { display: flex; }
@@ -1302,15 +1293,15 @@ border-radius:10px;
 }
 
 /* Munculkan saat Hover (Desktop) */
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
     .nav-dropdown:hover .dropdown-menu {
         display: block;
         animation: fadeIn 0.3s ease;
     }
 }
 
-/* Responsive untuk Mobile (HP) */
-@media (max-width: 768px) {
+/* Responsive untuk Mobile & Tablet */
+@media (max-width: 1024px) {
     .dropdown-menu {
         position: static;
         display: none;
@@ -1523,8 +1514,21 @@ border-radius:10px;
 
 /* Responsive */
 @media (max-width: 768px) {
+    #product-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
     .card-image {
         height: 150px;
+    }
+    
+    .card-content {
+        padding: 10px;
+    }
+    
+    .card-title {
+        font-size: 0.95rem;
     }
     
     .price {
