@@ -63,7 +63,7 @@
                 <form id="banner-form" method="post">
                     <div class="form-group">
                         <label><i class="bi bi-images"></i> Upload Gambar Banner</label>
-                        <input type="file" id="banner-image" style="cursor: pointer;" class="form-control" accept="image/*">
+                        <input type="file" name="image" id="banner-image" style="cursor: pointer;" class="form-control" accept="image/*">
                     </div>
 
                     <img id="banner-preview" style="max-width:300px; max-height:150px; border-radius:8px; margin-top:10px; display:none; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
@@ -97,7 +97,7 @@
                                             <a href="{{ route('admin.banner.index') }}?edit={{ $banner->id }}" class="btn-edit">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
-                                            <form action="{{ route('admin.banner.destroy', $banner->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?');" style="display:inline-block;">
+                                            <form action="{{ route('admin.banner.destroy', $banner->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus banner ini?');" style="display:inline-block;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn-delete"><i class="bi bi-trash-fill"></i></button>
