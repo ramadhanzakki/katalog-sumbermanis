@@ -16,4 +16,5 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('products', \App\Http\Controllers\Admin\DashboardController::class)->except(['create', 'edit', 'show']);
+    Route::view('/banner', 'admin.banner')->name('banner.index');
 });

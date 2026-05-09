@@ -11,7 +11,6 @@ return new class extends Migration
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
             $table->string('image_path');            // Path gambar banner, misal "banners/promo.jpg"
-            $table->string('link_url')->nullable();  // URL tujuan saat banner diklik, boleh kosong
             $table->integer('sort_order')->default(0); // Urutan tampil di slider, angka kecil = pertama
             $table->boolean('is_active')->default(true); // Toggle tampil/sembunyi
             $table->timestamps();
