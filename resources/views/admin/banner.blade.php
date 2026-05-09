@@ -43,7 +43,7 @@
             <!-- STATS -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <h3 id="total-banners">0</h3>
+                    <h3 id="total-banners">{{ $totalBanners }}</h3>
                     <p>Total Banner</p>
                 </div>
                 <div class="stat-card">
@@ -51,7 +51,7 @@
                     <p>Batas Maksimal</p>
                 </div>
                 <div class="stat-card">
-                    <h3 id="remaining-banners">6</h3>
+                    <h3 id="remaining-banners">{{ $availableSlotBanners }}</h3>
                     <p>Sisa Slot Banner</p>
                 </div>
             </div>
@@ -60,12 +60,12 @@
             <div class="form-container">
                 <h3><i class="bi bi-plus-circle"></i> Tambah Banner Baru</h3>
                 <p>NOTE: sebelum memasukan banner, pastikan ukuran banner adalah 500 x 250 px <i class="bi bi-emoji-smile"></i></p>
-                <form id="banner-form">
+                <form id="banner-form" method="post">
                     <div class="form-group">
                         <label><i class="bi bi-images"></i> Upload Gambar Banner</label>
                         <input type="file" id="banner-image" style="cursor: pointer;" class="form-control" accept="image/*">
                     </div>
-                    
+
                     <img id="banner-preview" style="max-width:300px; max-height:150px; border-radius:8px; margin-top:10px; display:none; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
                     
                     <button type="submit" class="btn-submit mt-3">
@@ -82,13 +82,30 @@
                         <thead>
                             <tr>
                                 <th>Preview</th>
-                                <th>Link Banner</th>
                                 <th>Tanggal</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="banner-list">
-                            <!-- Banner akan di-render di sini -->
+                            @foreach ($banners as $banner)
+                                <tr>
+                                    <td><img src="{{ $banner->getImageUrlAttribute() }}" alt="{{ $banner->image_path }}" class="product-img"></td>
+                                    <td>{{ $banner->updated_at }}</td>
+                                    <td>
+                                        <div class="action-btns">
+                                            {{-- Tombol Edit: link ke ?edit=ID, page scroll ke atas otomatis --}}
+                                            <a href="{{ route('admin.banner.index') }}?edit={{ $banner->id }}" class="btn-edit">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                            <form action="{{ route('admin.banner.destroy', $banner->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?');" style="display:inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn-delete"><i class="bi bi-trash-fill"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
