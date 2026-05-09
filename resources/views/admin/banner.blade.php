@@ -79,7 +79,16 @@
                 <form action="{{ route('admin.banner.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
+                        
+                        @if($selectBanner && $selectBanner->image_path)
+                        <div style="margin-bottom: 8px;">
+                            <img src="{{ $selectBanner->image_url }}" alt="Gambar saat ini" style="max-width: 150px; border-radius: 8px;">
+                            <p style="font-size: 0.8rem; color: #aaa; margin-top: 4px;">Gambar saat ini. Upload baru untuk mengganti.</p>
+                        </div>
+                        @endif
+                        
                         <label><i class="bi bi-images"></i> Upload Gambar Banner</label>
+                        
                         <input type="file" name="image" id="banner-image" style="cursor: pointer;" class="form-control @error('image') is-invalid @enderror" accept="image/*">
                         @error('image')
                             <div style="color: red; font-size: 0.8rem; margin-top: 5px;">{{ $message }}</div>
