@@ -21,6 +21,7 @@
             </div>
             <ul class="sidebar-menu">
                 <li><a href="{{ route('admin.dashboard') }}" class="active"><i class="bi bi-box-seam-fill"></i> Kelola Produk</a></li>
+                <li><a href="{{ route('admin.banner.index') }}"><i class="bi bi-file-richtext"></i> Kelola Banner</a></li>
                 <li style="margin-top: auto;">
                     <form action="{{ route('auth.logout') }}" method="POST">
                         @csrf
