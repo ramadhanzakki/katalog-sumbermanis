@@ -153,7 +153,7 @@
                             </div>
 
                             {{-- Harga Grosir (tersembunyi jika tidak ada) --}}
-                            <div id="modal-grosir-box" style="price-row">
+                            <div id="modal-grosir-box" style="border-top: 1px dashed #ccc; margin-top: 8px; padding-top: 8px;">
                                 <div class="price-row">
                                     <span class="price-label">
                                         Harga Grosir (<span id="modal-min-grosir">{{ $product->wholesale_min_qty }}</span> pcs):
@@ -182,7 +182,6 @@
 
 {{-- JS khusus halaman ini          --}}
 @push('scripts')
-
 
 
 <script src="{{ asset('js/banner.js') }}"></script>
