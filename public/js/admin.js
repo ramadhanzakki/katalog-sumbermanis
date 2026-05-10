@@ -1,15 +1,19 @@
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Image product admin loaded');
+    
+    // Preview gambar
+    document.getElementById('product-image').onchange = previewImage;
+});
 
-function previewImage(input) {
+function previewImage() {
+    const file = this.files[0];
     const preview = document.getElementById('image-preview');
-    if (input.files && input.files[0]) {
+    if (file) {
         const reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = e => {
             preview.src = e.target.result;
             preview.style.display = 'block';
         };
-        reader.readAsDataURL(input.files[0]);
-    } else {
-        preview.src = '';
-        preview.style.display = 'none';
+        reader.readAsDataURL(file);
     }
 }

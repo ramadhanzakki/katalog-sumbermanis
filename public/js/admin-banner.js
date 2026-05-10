@@ -1,5 +1,3 @@
-let maxBanners = 6;
-
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Banner admin loaded');
     

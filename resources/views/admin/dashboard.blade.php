@@ -204,6 +204,7 @@
                             <input
                                 type="file"
                                 name="image"
+                                id="product-image"
                                 class="form-control"
                             >
                             <img id="image-preview" src="" style="max-width: 200px; margin-top: 10px; display: none; border-radius: 8px;">
