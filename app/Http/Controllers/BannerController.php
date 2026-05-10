@@ -29,6 +29,12 @@ class BannerController extends Controller
     }
 
     public function store(Request $request){
+        $bannerCount = Banner::count();
+
+        if ($bannerCount >= 6) {
+            return redirect()->route('admin.banner.index')->with('failed', 'Jumlah banner sudah maksimal. Hapus salah satu untuk menambah!');
+        }
+
         $validated = $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048'
         ]);
