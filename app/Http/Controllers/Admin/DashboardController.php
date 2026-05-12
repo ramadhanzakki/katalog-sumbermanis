@@ -19,7 +19,6 @@ class DashboardController extends Controller
         $lowStock = Product::where('stock', '<=', 5)->where('stock', '>', 0)->count();
         $outOfStock = Product::where('stock', '<=', 0)->count();
 
-        // Cek apakah ada parameter ?edit=id untuk mode edit
         $selectedProduct = null;
         if ($request->query('edit')) {
             $selectedProduct = Product::find($request->query('edit'));
@@ -74,7 +73,6 @@ class DashboardController extends Controller
 
         $data = $request->except('image');
 
-        // Jika ada upload gambar baru
         if ($request->hasFile('image')) {
             if ($product->image_path) {
                 Storage::disk('public')->delete($product->image_path);
