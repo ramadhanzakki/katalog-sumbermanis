@@ -15,7 +15,7 @@ class UserController extends Controller
 
         $products = Product::with('category')
             ->where('is_active', true)
-            ->orderBy('name')
+            ->orderBy('created_at')
             ->get()
             ->map(function ($product) {
                 $product->image_url    = $product->image_url; 
@@ -23,7 +23,6 @@ class UserController extends Controller
                 return $product;
             });
 
-        // Ambil banner yang aktif, urut sesuai sort_order
         $banners = Banner::where('is_active', true)
             ->orderBy('sort_order')
             ->get()

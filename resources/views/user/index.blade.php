@@ -18,9 +18,7 @@
             <div id="banner-track">
                 @foreach ($banners as $banner)
                     <div class="banner-slide">
-                        <a href="{{ $banner->link_url ?? '#' }}" target="{{ $banner->link_url ? '_blank' : '_self' }}" rel="noopener noreferrer">
-                            <img src="{{ $banner->image_url }}" alt="Banner Promo">
-                        </a>
+                        <img src="{{ $banner->image_url }}" alt="Banner Promo">
                     </div>
                 @endforeach
             </div>
@@ -59,8 +57,7 @@
         <div class="product-grid" id="product-container">
             @forelse ($products as $product)
                 <div class="card {{ $product->stock <= 0 ? 'sold-out' : '' }}" 
-                    data-category="{{ $product->category_name }}" 
-                    data-product-id="{{ $product->id }}"
+                    data-category="{{ $product->category_name }}"
                     onclick="openModal('productModal{{ $product->id }}')">
 
                     <img src="{{ $product->getImageUrlAttribute() }}" 

@@ -39,7 +39,7 @@ class DashboardController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
             'price_retail' => 'required|numeric|min:0',
@@ -50,27 +50,19 @@ class DashboardController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        $data = $request->except('image');
+
         if ($request->hasFile('image')) {
-            $photo = $request->file('image');
-            $photoName = Str::uuid() . '.' . $photo->getClientOriginalExtension();
-            
-            // Simpan file ke disk 'public' dalam folder 'products'
-            Storage::disk('public')->putFileAs('products', $photo, $photoName);
-            
-            // Simpan path relatif ke database (termasuk folder 'products/')
-            $validated['image_path'] = 'products/' . $photoName;
+            $data['image_path'] = $request->file('image')->store('products', 'public');
         }
 
-        // Hapus 'image' dari array agar tidak bentrok saat create (karena kolom di DB adalah image_path)
-        unset($validated['image']);
-
-        Product::create($validated);
+        Product::create($data);
         return redirect()->route('admin.dashboard')->with('success', 'Produk berhasil ditambahkan!');
     }
 
     public function update(Request $request, Product $product)
     {
-        $validated = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
             'price_retail' => 'required|numeric|min:0',
@@ -81,23 +73,17 @@ class DashboardController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        $data = $request->except('image');
+
+        // Jika ada upload gambar baru
         if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            if ($file && $file->isValid()) {
-                // Hapus file lama jika ada
-                if ($product->image_path) {
-                    Storage::disk('public')->delete($product->image_path);
-                }
-                // Simpan file baru
-                $validated['image_path'] = \Illuminate\Support\Facades\Storage::disk('public')->putFile('products', $file);
+            if ($product->image_path) {
+                Storage::disk('public')->delete($product->image_path);
             }
+            $data['image_path'] = $request->file('image')->store('products', 'public');
         }
 
-        // Hapus 'image' dari array agar tidak bentrok saat update
-        unset($validated['image']);
-
-        $product->update($validated);
-
+        $product->update($data);
         return redirect()->route('admin.dashboard')->with('success', 'Produk berhasil diperbarui!');
     }
 

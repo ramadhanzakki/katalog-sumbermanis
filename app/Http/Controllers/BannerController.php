@@ -43,10 +43,8 @@ class BannerController extends Controller
             $photo = $request->file('image');
             $photoName = Str::uuid() . '.' . $photo->getClientOriginalExtension();
             
-            // Simpan file ke disk 'public' dalam folder 'banners'
             Storage::disk('public')->putFileAs('banners', $photo, $photoName);
             
-            // Simpan path relatif ke database (termasuk folder 'banners/')
             $validated['image_path'] = 'banners/' . $photoName;
         }
 
@@ -64,11 +62,10 @@ class BannerController extends Controller
         if ($request->hasFile('image')) {
             $photo = $request->file('image');
             if ($photo && $photo->isValid()) {
-                // Hapus file lama jika ada
                 if ($banner->image_path) {
                     Storage::disk('public')->delete($banner->image_path);
                 }
-                // Simpan file baru
+                
                 $validated['image_path'] = Storage::disk('public')->putFile('products', $photo);
             }
         }
