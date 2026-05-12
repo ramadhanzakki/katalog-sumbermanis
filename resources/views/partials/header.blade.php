@@ -4,6 +4,22 @@
 {{-- ============================================ --}}
 
 <header class="header">
+    <div class="clouds">
+        <!-- awan kecil -->
+        <span class="cloud small c1"></span>
+        <span class="cloud small c2"></span>
+        <span class="cloud small c3"></span>
+        <span class="cloud small c4"></span>
+        <span class="cloud small c5"></span>
+        <span class="cloud small c6"></span>
+        <span class="cloud small c7"></span>
+        <span class="cloud small c8"></span>
+        <span class="cloud small c9"></span>
+
+        <!-- awan bawah -->
+        <div class="cloud big left"></div>
+        <div class="cloud big right"></div>
+    </div>
     <div class="header-content">
         <div class="header-left">
             <a href="{{ route('auth.login') }}" class="navbar-brand">
