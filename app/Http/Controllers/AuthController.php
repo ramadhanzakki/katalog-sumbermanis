@@ -20,6 +20,7 @@ class AuthController extends Controller
     }
 
     //Proses login dari form.
+    
     public function login(Request $request)
     {
         // Validasi input
@@ -30,6 +31,7 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
 
+        
         if (Auth::attempt($credentials)) {
             // Regenerate session untuk keamanan (cegah session fixation)
             $request->session()->regenerate();

@@ -14,10 +14,9 @@ function filterProducts() {
 
     cards.forEach(card => {
         const title    = (card.querySelector('.card-title')?.innerText || '').toLowerCase();
-        const desc     = (card.querySelector('.card-desc')?.innerText  || '').toLowerCase();
         const category = (card.dataset.category || '').toLowerCase();
 
-        const matchSearch   = title.includes(keyword) || desc.includes(keyword);
+        const matchSearch   = title.startsWith(keyword);
         const matchCategory = currentCategory === 'all' || category === currentCategory.toLowerCase();
 
         card.style.display = (matchSearch && matchCategory) ? 'block' : 'none';

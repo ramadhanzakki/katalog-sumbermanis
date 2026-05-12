@@ -46,7 +46,7 @@
 
                 {{-- Pesan Error dari Laravel --}}
                 @if (session('error'))
-                    <div class="alert alert-danger" style="padding: 12px; border-radius: 8px; background: #fde8e8; color: #c0392b; margin-bottom: 1rem;">
+                    <div class="alert alert-danger" style="padding: 12px; border-radius: 8px; background: #fde8e8; color: #c0392b; margin-bottom: 1rem; display: block !important;">
                         <i class="bi bi-exclamation-circle"></i> {{ session('error') }}
                     </div>
                 @endif
